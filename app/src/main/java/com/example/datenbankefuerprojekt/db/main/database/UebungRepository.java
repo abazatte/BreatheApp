@@ -21,9 +21,7 @@ public class UebungRepository {
         alleFragmente = fragmentDao.getAllFragments();
     }
 
-    public LiveData<List<Fragment>> getAlleFragmenteOfUebung(int id){
-        return fragmentDao.getAllFragmentsOfUebung(id);
-    }
+
 
     public void insertUebung(Uebung uebung) {
         new InsertUebungAsyncTask(uebungDao).execute(uebung);
@@ -41,9 +39,7 @@ public class UebungRepository {
         new DeleteAllUebungAsyncTask(uebungDao).execute();
     }
 
-    public LiveData<List<Uebung>> getAlleUebungen() {
-        return alleUebungen;
-    }
+
 
     public void insertFragment(Fragment fragment) {
         new InsertFragmentAsyncTask(fragmentDao).execute(fragment);
@@ -61,8 +57,18 @@ public class UebungRepository {
         new DeleteAllFragmentAsyncTask(fragmentDao).execute();
     }
 
+
+
     public LiveData<List<Fragment>> getAlleFragment() {
         return alleFragmente;
+    }
+
+    public LiveData<List<Fragment>> getAlleFragmenteOfUebung(int id){
+        return fragmentDao.getAllFragmentsOfUebung(id);
+    }
+
+    public LiveData<List<Uebung>> getAlleUebungen() {
+        return alleUebungen;
     }
 
 

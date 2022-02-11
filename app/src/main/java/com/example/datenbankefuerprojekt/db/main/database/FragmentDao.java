@@ -27,6 +27,6 @@ public interface FragmentDao {
     @Query("SELECT * FROM fragment_table ORDER BY id ASC")
     LiveData<List<Fragment>> getAllFragments();
 
-    @Query("Select * From fragment_table join uebung_table on uebung_table.id = fragment_table.uebungId where uebungId = :uebungId ORder by id aSc")
+    @Query("Select * From fragment_table join uebung_table on uebung_table.id = fragment_table.uebungId where uebungId = :uebungId ORder by prioritaetFragment aSc")
     LiveData<List<Fragment>> getAllFragmentsOfUebung(int uebungId);
 }

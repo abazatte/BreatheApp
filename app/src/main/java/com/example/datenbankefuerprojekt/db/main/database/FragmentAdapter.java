@@ -15,7 +15,11 @@ import com.example.datenbankefuerprojekt.R;
 public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.FragmentHolder> {
     private OnItemClickListener listener;
 
-    public FragmentAdapter(){super(DIFF_CALLBACK);}
+    public FragmentAdapter(){
+        super(DIFF_CALLBACK);
+    }
+
+    //wo wird dies aufgerufen??
     private static final DiffUtil.ItemCallback<Fragment> DIFF_CALLBACK = new DiffUtil.ItemCallback<Fragment>() {
         @Override
         public boolean areItemsTheSame(@NonNull Fragment oldItem, @NonNull Fragment newItem) {
@@ -24,8 +28,8 @@ public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.Fragm
 
         @Override
         public boolean areContentsTheSame(@NonNull Fragment oldItem, @NonNull Fragment newItem) {
-            return oldItem.getTitel().equals(newItem.getTitel()) &&
-                    oldItem.getAnzahlWiederholungen() == newItem.getAnzahlWiederholungen() &&
+            return oldItem.getTitelFragment().equals(newItem.getTitelFragment()) &&
+                    oldItem.getAnzahlWiederholungenFragment() == newItem.getAnzahlWiederholungenFragment() &&
                     oldItem.getAusAtmenZeit() == newItem.getAusAtmenZeit() &&
                     oldItem.getAusLuftanhaltZeit() == newItem.getAusLuftanhaltZeit() &&
                     oldItem.getEinAtmenZeit() == newItem.getEinAtmenZeit() &&
@@ -44,9 +48,9 @@ public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.Fragm
     @Override
     public void onBindViewHolder(@NonNull FragmentHolder holder, int position) {
         Fragment currentNote = getItem(position);
-        holder.textViewTitel.setText(currentNote.getTitel());
+        holder.textViewTitel.setText(currentNote.getTitelFragment());
         holder.textViewBeschreibung.setText("Ausatmen: " + currentNote.getAusAtmenZeit() + "\nEinatmen: " + currentNote.getEinAtmenZeit());
-        holder.textViewPrioritaet.setText(String.valueOf(currentNote.getPrioritaet()));
+        holder.textViewPrioritaet.setText(String.valueOf(currentNote.getPrioritaetFragment()));
     }
 
     public Fragment getFragmentAt(int position){

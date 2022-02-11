@@ -5,17 +5,13 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
-
-import org.jetbrains.annotations.PropertyKey;
-
 @Entity(indices = {@Index(value = {"id","uebungId"},unique = true)},tableName = "fragment_table", foreignKeys = {@ForeignKey(entity = Uebung.class, parentColumns = "id", childColumns = "uebungId", onDelete = ForeignKey.CASCADE)})
 public class Fragment {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String titel;
+    private String titelFragment;
 
     private int uebungId;
 
@@ -27,19 +23,19 @@ public class Fragment {
 
     private int ausLuftanhaltZeit;
 
-    private int anzahlWiederholungen;
+    private int anzahlWiederholungenFragment;
 
-    private int prioritaet;
+    private int prioritaetFragment;
 
-    public Fragment(String titel, int uebungId, int einAtmenZeit, int einLuftanhaltZeil, int ausAtmenZeit, int ausLuftanhaltZeit, int anzahlWiederholungen, int prioritaet){
-        this.titel = titel;
+    public Fragment(String titelFragment, int uebungId, int einAtmenZeit, int einLuftanhaltZeil, int ausAtmenZeit, int ausLuftanhaltZeit, int anzahlWiederholungenFragment, int prioritaetFragment){
+        this.titelFragment = titelFragment;
         this.uebungId = uebungId;
         this.einAtmenZeit = einAtmenZeit;
         this.einLuftanhaltZeil = einLuftanhaltZeil;
         this.ausAtmenZeit = ausAtmenZeit;
         this.ausLuftanhaltZeit = ausLuftanhaltZeit;
-        this.anzahlWiederholungen = anzahlWiederholungen;
-        this.prioritaet = prioritaet;
+        this.anzahlWiederholungenFragment = anzahlWiederholungenFragment;
+        this.prioritaetFragment = prioritaetFragment;
     }
 
     public void setId(int id) {
@@ -54,8 +50,8 @@ public class Fragment {
         return uebungId;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitelFragment() {
+        return titelFragment;
     }
 
     public int getEinAtmenZeit() {
@@ -74,9 +70,9 @@ public class Fragment {
         return ausLuftanhaltZeit;
     }
 
-    public int getAnzahlWiederholungen() {
-        return anzahlWiederholungen;
+    public int getAnzahlWiederholungenFragment() {
+        return anzahlWiederholungenFragment;
     }
 
-    public int getPrioritaet() { return prioritaet; }
+    public int getPrioritaetFragment() { return prioritaetFragment; }
 }

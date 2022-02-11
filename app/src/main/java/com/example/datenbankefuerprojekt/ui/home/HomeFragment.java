@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentHomeBinding;
 import com.example.datenbankefuerprojekt.db.main.database.Uebung;
 import com.example.datenbankefuerprojekt.db.main.database.UebungAdapter;
+import com.example.datenbankefuerprojekt.ui.slideshow.SlideshowViewModel;
 
 import java.util.List;
 
@@ -38,16 +40,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+
         setHasOptionsMenu(true);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        binding.buttonAddNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new AddEditUebungFragment());
-                fragmentTransaction.commit();
-            }
+        binding.buttonAddNote.setOnClickListener(view -> {
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new AddEditUebungFragment());
+            fragmentTransaction.commit();
         });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -56,7 +57,9 @@ public class HomeFragment extends Fragment {
         final UebungAdapter adapter = new UebungAdapter();
         binding.recyclerView.setAdapter(adapter);
 
-        homeViewModel = new HomeViewModel(getActivity().getApplication());
+
+        //homeViewModel = new HomeViewModel(getActivity().getApplication());
+
 
         homeViewModel.getAllUebung().observe(this, new Observer<List<Uebung>>() {
             @Override
@@ -64,6 +67,10 @@ public class HomeFragment extends Fragment {
                 adapter.submitList(uebungs);
             }
         });
+
+        /*
+         * dieses swipen
+         * */
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
             @Override

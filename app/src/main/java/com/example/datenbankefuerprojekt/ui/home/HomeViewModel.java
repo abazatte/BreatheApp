@@ -35,6 +35,7 @@ public class HomeViewModel extends AndroidViewModel {
     public void deleteAllUebung() {
         repository.deleteAllUebungen();
     }
+
     public LiveData<List<Uebung>> getAllUebung() {return allUebung;}
 
     public void insertFragment(Fragment fragment){
@@ -46,8 +47,9 @@ public class HomeViewModel extends AndroidViewModel {
     public void deleteFragment(Fragment fragment){
         repository.deleteFragment(fragment);
     }
-    public LiveData<List<Fragment>> getAllFragmentsOfUebung(int fragment){
-        return repository.getAlleFragmenteOfUebung(fragment);
+
+    public LiveData<List<Fragment>> getAllFragmentsOfUebung(int uebungID){
+        return repository.getAlleFragmenteOfUebung(uebungID);
     }
 }
 

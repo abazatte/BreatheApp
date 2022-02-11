@@ -1,16 +1,13 @@
 package com.example.datenbankefuerprojekt.ui.home;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,10 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import com.example.datenbankefuerprojekt.HomeActivity;
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentAddEditUebungBinding;
 import com.example.datenbankefuerprojekt.db.main.database.FragmentAdapter;
@@ -54,7 +49,7 @@ public class AddEditUebungFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        homeViewModel = new HomeViewModel(getActivity().getApplication());
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         setHasOptionsMenu(true);
         binding = FragmentAddEditUebungBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -131,13 +126,13 @@ public class AddEditUebungFragment extends Fragment {
                 //TODO: hier was machen
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt(HomeFragment.EXTRA_ID, fragment.getId());
-                bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitel());
-                bundle1.putInt(HomeFragment.EXTRA_PRIO, fragment.getPrioritaet());
+                bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitelFragment());
+                bundle1.putInt(HomeFragment.EXTRA_PRIO, fragment.getPrioritaetFragment());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_EIN, fragment.getEinAtmenZeit());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTEIN, fragment.getEinLuftanhaltZeil());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_AUS, fragment.getAusAtmenZeit());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTAUS, fragment.getAusLuftanhaltZeit());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_COUNT, fragment.getAnzahlWiederholungen());
+                bundle1.putInt(AddEditUebungFragment.EXTRA_COUNT, fragment.getAnzahlWiederholungenFragment());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_UEBUNG_ID, fragment.getUebungId());
 
                 AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();

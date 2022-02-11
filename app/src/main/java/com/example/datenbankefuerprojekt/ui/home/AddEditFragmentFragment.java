@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,17 +41,12 @@ public class AddEditFragmentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
-        homeViewModel = new HomeViewModel(getActivity().getApplication());
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+
         setHasOptionsMenu(true);
         binding = FragmentAddEditFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        editTextTitel = binding.editTextTitle;
-        editTextPrio = binding.numberPickerPriority;
-        editTextEinAtmen = binding.einatmenZeit;
-        editTextLuftAnhalt = binding.luftAnhaltZeit;
-        editTextAusAtem = binding.ausatemZeit;
-        editTextLuftAusHalt = binding.luftAusAnhaltZeit;
-        editTextWiederholungen = binding.counter;
+        initUI();
 
         bundle = getArguments();
 
@@ -73,7 +70,29 @@ public class AddEditFragmentFragment extends Fragment {
         return root;
     }
 
+    /**
+     * @author Abdurrahman Azattemür, Maximilian Jaesch
+     * <p></p>
+     * hier werden die UI Elemente von dem Binding mit den XML elementen verbunden
+     *
+     * */
+    private void initUI(){
+        editTextTitel = binding.editTextTitle;
+        editTextPrio = binding.numberPickerPriority;
+        editTextEinAtmen = binding.einatmenZeit;
+        editTextLuftAnhalt = binding.luftAnhaltZeit;
+        editTextAusAtem = binding.ausatemZeit;
+        editTextLuftAusHalt = binding.luftAusAnhaltZeit;
+        editTextWiederholungen = binding.counter;
+    }
+
     private void saveFragment() {
+        //hier wird aus den editTexts die Werte entnommen
+        if (isAFieldEmpty()) {
+            Toast.makeText(getActivity(), "Bitte jedes Feld ausfüllen", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String titel = editTextTitel.getText().toString();
         int prio = Integer.parseInt(editTextPrio.getText().toString());
         int einatmen = Integer.parseInt(editTextEinAtmen.getText().toString());
@@ -81,14 +100,16 @@ public class AddEditFragmentFragment extends Fragment {
         int ausatmen = Integer.parseInt(editTextAusAtem.getText().toString());
         int luftaus = Integer.parseInt(editTextLuftAusHalt.getText().toString());
         int count = Integer.parseInt(editTextWiederholungen.getText().toString());
+        //da die id nur intern ist, muss es aus dem Bundle entnommen werden
         int uebungId = bundle.getInt(AddEditUebungFragment.EXTRA_UEBUNG_ID);
 
-        if (titel.trim().isEmpty()) {
-            Toast.makeText(getActivity(), "Bitte einen Titel eingeben", Toast.LENGTH_SHORT).show();
-        }
 
+        //in die datenbank einfügen
         com.example.datenbankefuerprojekt.db.main.database.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
         homeViewModel.insertFragment(fragment);
+
+        //hier iwie die übung aus datenbank holen und dann mit bundle
+        //wir haben ja die übungs id
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.uebung_home);
@@ -96,6 +117,11 @@ public class AddEditFragmentFragment extends Fragment {
     }
 
     private void updateFragment(){
+        if (isAFieldEmpty()) {
+            Toast.makeText(getActivity(), "Bitte einen Titel eingeben", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String titel = editTextTitel.getText().toString();
         int prio = Integer.parseInt(editTextPrio.getText().toString());
         int einatmen = Integer.parseInt(editTextEinAtmen.getText().toString());
@@ -105,9 +131,7 @@ public class AddEditFragmentFragment extends Fragment {
         int count = Integer.parseInt(editTextWiederholungen.getText().toString());
         int uebungId = bundle.getInt(AddEditUebungFragment.EXTRA_UEBUNG_ID);
 
-        if (titel.trim().isEmpty()) {
-            Toast.makeText(getActivity(), "Bitte einen Titel eingeben", Toast.LENGTH_SHORT).show();
-        }
+
 
         com.example.datenbankefuerprojekt.db.main.database.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
         fragment.setId(id);
@@ -136,5 +160,21 @@ public class AddEditFragmentFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * @author Abdurrahman Azattemür, Maximilian Jaesch
+     *       <p></p>
+     *       Hier wird überprüft ob mindestens ein Feld leer ist.
+     * */
+    private boolean isAFieldEmpty(){
+
+        return TextUtils.isEmpty(editTextTitel.getText()) ||
+                TextUtils.isEmpty(editTextPrio.getText()) ||
+                TextUtils.isEmpty(editTextEinAtmen.getText()) ||
+                TextUtils.isEmpty(editTextLuftAnhalt.getText()) ||
+                TextUtils.isEmpty(editTextAusAtem.getText()) ||
+                TextUtils.isEmpty(editTextLuftAusHalt.getText()) ||
+                TextUtils.isEmpty(editTextWiederholungen.getText());
     }
 }
