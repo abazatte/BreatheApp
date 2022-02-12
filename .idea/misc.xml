@@ -3,9 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/content_home.xml" value="0.23645833333333333" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/fragment_add_edit_uebung.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_add_edit_fragment.xml" value="0.4" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_add_edit_uebung.xml" value="0.6" />
       </map>
     </option>
   </component>

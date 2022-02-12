@@ -38,9 +38,8 @@
         android:id="@+id/number_picker_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:layout_below="@id/dummy1"
-        />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/dummy2"
@@ -66,15 +65,15 @@
 
         tools:listitem="@layout/fragment_item" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <Button
         android:id="@+id/button_add_fragment"
         android:layout_width="wrap_content"
-        android:layout_height="73dp"
-        android:layout_below="@+id/recycler_view_fragment"
-        android:layout_marginStart="-58dp"
-        android:layout_marginTop="-73dp"
-        android:layout_toEndOf="@+id/recycler_view_fragment"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/number_picker_priority"
+        android:layout_marginStart="20dp"
+        android:layout_toRightOf="@id/dummy2"
         android:foregroundGravity="bottom"
-        android:src="@drawable/ic_add" />
+        android:text="new\nfragment"
+        android:textSize="12sp" />
 
 </RelativeLayout>
