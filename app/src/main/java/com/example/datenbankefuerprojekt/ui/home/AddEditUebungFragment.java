@@ -60,6 +60,7 @@ public class AddEditUebungFragment extends Fragment {
 
         Bundle bundle = getArguments();
 
+        binding.buttonAddFragment.setVisibility(View.INVISIBLE);
 
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.add_uebung);
         //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
@@ -74,7 +75,7 @@ public class AddEditUebungFragment extends Fragment {
                 numberPickerPriority.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_PRIO)));
                 numberPickerCount.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_COUNT)));
                 isEdit = true;
-
+                binding.buttonAddFragment.setVisibility(View.VISIBLE);
             }
         }
 
@@ -98,7 +99,7 @@ public class AddEditUebungFragment extends Fragment {
         final FragmentAdapter adapter = new FragmentAdapter();
         binding.recyclerViewFragment.setAdapter(adapter);
 
-        if(id!=-1){
+        if (id != -1) {
             homeViewModel.getAllFragmentsOfUebung(id).observe(this, new Observer<List<com.example.datenbankefuerprojekt.db.main.database.Fragment>>() {
                 @Override
                 public void onChanged(List<com.example.datenbankefuerprojekt.db.main.database.Fragment> fragments) {
@@ -107,7 +108,7 @@ public class AddEditUebungFragment extends Fragment {
             });
         }
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -204,3 +205,25 @@ public class AddEditUebungFragment extends Fragment {
         }
     }
 }
+
+/*
+CODE GRAVEYARD:
+String titel = editTextTitel.getText().toString();
+                    String desc = editTextDesc.getText().toString();
+                    int prio = Integer.parseInt(numberPickerPriority.getText().toString());
+                    int count = Integer.parseInt(numberPickerCount.getText().toString());
+                    if (titel.trim().isEmpty() || desc.trim().isEmpty()) {
+                        Toast.makeText(getActivity(), "Bitte Titel und Beschreibung hinzufuegen.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Uebung uebung = new Uebung(titel, desc, count, prio);
+                    homeViewModel.insert(uebung);
+
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putInt(EXTRA_UEBUNG_ID, uebung.getId());
+                    AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();
+                    addEditFragmentFragment.setArguments(bundle1);
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditFragmentFragment);
+                    fragmentTransaction.commit();
+ */

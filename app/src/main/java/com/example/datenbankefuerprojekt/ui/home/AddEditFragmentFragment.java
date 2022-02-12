@@ -63,6 +63,8 @@ public class AddEditFragmentFragment extends Fragment {
                 editTextLuftAusHalt.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_LUFTAUS)));
                 editTextWiederholungen.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_COUNT)));
 
+                Toast.makeText(getActivity(), "Titel: " + editTextTitel.getText().toString() + "Prio: " + editTextPrio.getText().toString() , Toast.LENGTH_LONG).show();
+
                 isEdit = true;
             }
         }
