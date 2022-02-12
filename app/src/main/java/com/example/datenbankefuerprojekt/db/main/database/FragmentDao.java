@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -15,7 +16,7 @@ public interface FragmentDao {
     @Insert
     void insert(Fragment fragment);
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Fragment fragment);
 
     @Delete
@@ -24,7 +25,7 @@ public interface FragmentDao {
     @Query("DELETE  FROM fragment_table")
     void deleteAllFragments();
 
-    @Query("SELECT * FROM fragment_table ORDER BY id ASC")
+    @Query("SELECT * FROM fragment_table ORDER BY fragmentId ASC")
     LiveData<List<Fragment>> getAllFragments();
 
     @Query("Select * From fragment_table join uebung_table on uebung_table.id = fragment_table.uebungId where uebungId = :uebungId ORder by prioritaetFragment aSc")

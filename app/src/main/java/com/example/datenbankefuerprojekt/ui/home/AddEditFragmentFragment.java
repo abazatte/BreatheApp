@@ -134,7 +134,7 @@ public class AddEditFragmentFragment extends Fragment {
 
 
         com.example.datenbankefuerprojekt.db.main.database.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
-        fragment.setId(id);
+        fragment.setFragmentId(id);
         homeViewModel.updateFragment(fragment);
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());

@@ -125,7 +125,7 @@ public class AddEditUebungFragment extends Fragment {
             public void onItemClick(com.example.datenbankefuerprojekt.db.main.database.Fragment fragment) {
                 //TODO: hier was machen
                 Bundle bundle1 = new Bundle();
-                bundle1.putInt(HomeFragment.EXTRA_ID, fragment.getId());
+                bundle1.putInt(HomeFragment.EXTRA_ID, fragment.getFragmentId());
                 bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitelFragment());
                 bundle1.putInt(HomeFragment.EXTRA_PRIO, fragment.getPrioritaetFragment());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_EIN, fragment.getEinAtmenZeit());

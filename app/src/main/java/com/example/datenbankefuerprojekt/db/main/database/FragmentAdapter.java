@@ -23,7 +23,7 @@ public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.Fragm
     private static final DiffUtil.ItemCallback<Fragment> DIFF_CALLBACK = new DiffUtil.ItemCallback<Fragment>() {
         @Override
         public boolean areItemsTheSame(@NonNull Fragment oldItem, @NonNull Fragment newItem) {
-            return oldItem.getId() == newItem.getId();
+            return oldItem.getFragmentId() == newItem.getFragmentId();
         }
 
         @Override
