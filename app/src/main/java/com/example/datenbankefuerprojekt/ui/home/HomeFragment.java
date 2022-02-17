@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,9 +47,11 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.buttonAddNote.setOnClickListener(view -> {
+            Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung);
+            /*
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new AddEditUebungFragment());
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
         });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -98,10 +101,16 @@ public class HomeFragment extends Fragment {
                 addEditUebungFragment.setArguments(bundle);
 
                 //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
+                Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, bundle);
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditUebungFragment);
-                fragmentTransaction.commit();
+                //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                //fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditUebungFragment);
+                //
+                //this breaks everything if you save or go into the weird other thing idk man
+                //fragmentTransaction.addToBackStack(null);
+                //
+                //
+                //fragmentTransaction.commit();
             }
         });
         return root;

@@ -3,15 +3,15 @@ package com.example.datenbankefuerprojekt.ui.home;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,16 +34,23 @@ public class AddEditUebungFragment extends Fragment {
     public static final String EXTRA_LUFTEIN = "com.example.datenbankefuerprojekt.ui.home.LUFTEIN";
     public static final String EXTRA_AUS = "com.example.datenbankefuerprojekt.ui.home.AUS";
     public static final String EXTRA_LUFTAUS = "com.example.datenbankefuerprojekt.ui.home.LUFTAUS";
-    public static final String EXTRA_COUNT = "com.example.datenbankefuerprojekt.ui.home.COUNT";
+
+    //macht grade keine probleme aber am besten refactoren!!! ueberschneidet sich mit count von uebung
+    public static final String EXTRA_FRAGMENT_COUNT = "com.example.datenbankefuerprojekt.ui.home.FRAGMENT_COUNT";
+
     public static final String EXTRA_UEBUNG_ID = "com.example.datenbankefuerprojekt.ui.home.UEBUNGID";
     private EditText editTextTitel;
     private EditText editTextDesc;
-    private EditText numberPickerPriority;
-    private EditText numberPickerCount;
+
+    private EditText editTextUebungPriority;
+    private EditText editTextUebungCount;
     private FragmentAddEditUebungBinding binding;
     private HomeViewModel homeViewModel;
     private boolean isEdit = false;
     private int id;
+
+
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,25 +62,26 @@ public class AddEditUebungFragment extends Fragment {
         View root = binding.getRoot();
         editTextTitel = binding.editTextTitle;
         editTextDesc = binding.editTextDescription;
-        numberPickerPriority = binding.numberPickerPriority;
-        numberPickerCount = binding.counter;
+        editTextUebungPriority = binding.numberPickerPriority;
+        editTextUebungCount = binding.counter;
 
         Bundle bundle = getArguments();
 
         binding.buttonAddFragment.setVisibility(View.INVISIBLE);
 
-        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.add_uebung);
+        //vlt kann man das auch lösen iwie mit navigation????
+        //((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.add_uebung);
         //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
 
         if (bundle != null) {
             id = bundle.getInt(HomeFragment.EXTRA_ID, -1);
-            ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.edit_uebung);
+            //((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.edit_uebung);
 
             if (id != -1) {
                 editTextTitel.setText(bundle.getString(HomeFragment.EXTRA_TITEL));
                 editTextDesc.setText(bundle.getString(HomeFragment.EXTRA_DESC));
-                numberPickerPriority.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_PRIO)));
-                numberPickerCount.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_COUNT)));
+                editTextUebungPriority.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_PRIO)));
+                editTextUebungCount.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_COUNT)));
                 isEdit = true;
                 binding.buttonAddFragment.setVisibility(View.VISIBLE);
             }
@@ -84,12 +92,16 @@ public class AddEditUebungFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt(EXTRA_UEBUNG_ID, id);
+
+                Navigation.findNavController(root).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home_add_edit_fragment, bundle1);
+                /*
                 AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();
                 addEditFragmentFragment.setArguments(bundle1);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditFragmentFragment);
-                fragmentTransaction.commit();
+                //fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();*/
             }
         });
 
@@ -133,15 +145,19 @@ public class AddEditUebungFragment extends Fragment {
                 bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTEIN, fragment.getEinLuftanhaltZeil());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_AUS, fragment.getAusAtmenZeit());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTAUS, fragment.getAusLuftanhaltZeit());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_COUNT, fragment.getAnzahlWiederholungenFragment());
+                bundle1.putInt(AddEditUebungFragment.EXTRA_FRAGMENT_COUNT, fragment.getAnzahlWiederholungenFragment());
                 bundle1.putInt(AddEditUebungFragment.EXTRA_UEBUNG_ID, fragment.getUebungId());
 
+                Navigation.findNavController(root).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home_add_edit_fragment, bundle1);
+
+
+                /*
                 AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();
                 addEditFragmentFragment.setArguments(bundle1);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditFragmentFragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
             }
         });
 
@@ -150,27 +166,40 @@ public class AddEditUebungFragment extends Fragment {
 
 
     private void saveUebung() {
+        if (isAFieldEmpty()) {
+            Toast.makeText(getActivity(), "Bitte jedes Feld ausfüllen", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String titel = editTextTitel.getText().toString();
         String desc = editTextDesc.getText().toString();
-        int prio = Integer.parseInt(numberPickerPriority.getText().toString());
-        int count = Integer.parseInt(numberPickerCount.getText().toString());
+        int prio = Integer.parseInt(editTextUebungPriority.getText().toString());
+        int count = Integer.parseInt(editTextUebungCount.getText().toString());
         if (titel.trim().isEmpty() || desc.trim().isEmpty()) {
             Toast.makeText(getActivity(), "Bitte Titel und Beschreibung hinzufuegen.", Toast.LENGTH_SHORT).show();
             return;
         }
         Uebung uebung = new Uebung(titel, desc, count, prio);
         homeViewModel.insert(uebung);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home);
+
+        /*
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.uebung_home);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
     }
 
     private void updateUebung() {
+        if (isAFieldEmpty()) {
+            Toast.makeText(getActivity(), "Bitte jedes Feld ausfüllen", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String titel = editTextTitel.getText().toString();
         String desc = editTextDesc.getText().toString();
-        int prio = Integer.parseInt(numberPickerPriority.getText().toString());
-        int count = Integer.parseInt(numberPickerCount.getText().toString());
+        int prio = Integer.parseInt(editTextUebungPriority.getText().toString());
+        int count = Integer.parseInt(editTextUebungCount.getText().toString());
         if (titel.trim().isEmpty() || desc.trim().isEmpty()) {
             Toast.makeText(getActivity(), "Bitte Titel und Beschreibung hinzufuegen.", Toast.LENGTH_SHORT).show();
             return;
@@ -178,10 +207,13 @@ public class AddEditUebungFragment extends Fragment {
         Uebung uebung = new Uebung(titel, desc, count, prio);
         uebung.setId(id);
         homeViewModel.update(uebung);
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home);
+
+        /*
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.uebung_home);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
     }
 
     @Override
@@ -204,7 +236,17 @@ public class AddEditUebungFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private boolean isAFieldEmpty(){
+
+        return TextUtils.isEmpty(editTextTitel.getText()) ||
+                TextUtils.isEmpty(editTextDesc.getText()) ||
+                TextUtils.isEmpty(editTextUebungCount.getText()) ||
+                TextUtils.isEmpty(editTextUebungPriority.getText());
+    }
 }
+
+
 
 /*
 CODE GRAVEYARD:

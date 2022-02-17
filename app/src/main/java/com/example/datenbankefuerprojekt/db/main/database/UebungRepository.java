@@ -71,7 +71,30 @@ public class UebungRepository {
         return alleUebungen;
     }
 
+    /*
+    public AsyncTask<Integer, Void, LiveData<Uebung>> getUebungById(int uebungId){
+        return new getUebungByIdAsyncTask(uebungDao).execute(uebungId);
+    }*/
 
+
+    public LiveData<Uebung> getUebungById(int uebungId){
+        return uebungDao.getUebungById(uebungId);
+    }
+
+    /*
+    private static class getUebungByIdAsyncTask extends AsyncTask<Integer, Void, LiveData<Uebung>> {
+        private UebungDao uebungDao;
+
+        private getUebungByIdAsyncTask(UebungDao uebungDao) {
+            this.uebungDao = uebungDao;
+        }
+
+        @Override
+        protected LiveData<Uebung> doInBackground(Integer... uebungId) {
+            return uebungDao.getUebungById(uebungId[0]);
+        }
+    }
+*/
     private static class InsertUebungAsyncTask extends AsyncTask<Uebung, Void, Void> {
         private UebungDao uebungDao;
 
@@ -85,7 +108,6 @@ public class UebungRepository {
             return null;
         }
     }
-
 
     private static class InsertFragmentAsyncTask extends AsyncTask<Fragment, Void, Void> {
         private FragmentDao fragmentDao;
@@ -184,4 +206,6 @@ public class UebungRepository {
             return null;
         }
     }
+
+
 }

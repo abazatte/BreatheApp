@@ -27,4 +27,7 @@ public interface UebungDao {
 
     @Query("SELECT * FROM uebung_table ORDER BY prioritaet DESC")
     LiveData<List<Uebung>> getAllNotes();
+
+    @Query("Select * from uebung_table where id=:id")
+    LiveData<Uebung> getUebungById(int id);
 }

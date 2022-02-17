@@ -1,12 +1,15 @@
 package com.example.datenbankefuerprojekt.ui.home;
 
+import static com.example.datenbankefuerprojekt.ui.home.HomeFragment.EXTRA_ID;
+import static com.example.datenbankefuerprojekt.ui.home.HomeFragment.EXTRA_PRIO;
+import static com.example.datenbankefuerprojekt.ui.home.HomeFragment.EXTRA_TITEL;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentAddEditFragmentBinding;
 
 public class AddEditFragmentFragment extends Fragment {
+    private static String TAG = "FragmentEDITOR";
 
     private EditText editTextTitel;
     private EditText editTextPrio;
@@ -35,6 +39,8 @@ public class AddEditFragmentFragment extends Fragment {
     private boolean isEdit = false;
     private int id;
     private Bundle bundle;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,24 +56,28 @@ public class AddEditFragmentFragment extends Fragment {
 
         bundle = getArguments();
 
-        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Add Fragment");
+
+
+        //((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Add Fragment");
         if (bundle != null){
-            id = bundle.getInt(HomeFragment.EXTRA_ID, -1);
+            id = bundle.getInt(EXTRA_ID, -1);
             if (id != -1){
-                ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Edit Fragment");
-                editTextTitel.setText(bundle.getString(HomeFragment.EXTRA_TITEL));
-                editTextPrio.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_PRIO)));
+                //((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Edit Fragment");
+                editTextTitel.setText(bundle.getString(EXTRA_TITEL));
+                editTextPrio.setText(Integer.toString(bundle.getInt(EXTRA_PRIO)));
                 editTextEinAtmen.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_EIN)));
                 editTextLuftAnhalt.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_LUFTEIN)));
                 editTextAusAtem.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_AUS)));
                 editTextLuftAusHalt.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_LUFTAUS)));
-                editTextWiederholungen.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_COUNT)));
+                editTextWiederholungen.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_FRAGMENT_COUNT)));
 
                 Toast.makeText(getActivity(), "Titel: " + editTextTitel.getText().toString() + "Prio: " + editTextPrio.getText().toString() , Toast.LENGTH_LONG).show();
 
                 isEdit = true;
             }
         }
+
+        //sweetHome = homeViewModel.getUebungById(bundle.getInt(AddEditUebungFragment.EXTRA_UEBUNG_ID)).get(10,);
 
         return root;
     }
@@ -112,10 +122,9 @@ public class AddEditFragmentFragment extends Fragment {
 
         //hier iwie die übung aus datenbank holen und dann mit bundle
         //wir haben ja die übungs id
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());
-        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.uebung_home);
-        fragmentTransaction.commit();
+
+        //zu vorigen screen zurückkehren
+        Navigation.findNavController(binding.getRoot()).popBackStack();
     }
 
     private void updateFragment(){
@@ -138,10 +147,9 @@ public class AddEditFragmentFragment extends Fragment {
         com.example.datenbankefuerprojekt.db.main.database.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
         fragment.setFragmentId(id);
         homeViewModel.updateFragment(fragment);
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());
-        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.uebung_home);
-        fragmentTransaction.commit();
+
+        //zu vorigen screen zurückkehren
+        Navigation.findNavController(binding.getRoot()).popBackStack();
     }
 
     @Override
@@ -179,4 +187,40 @@ public class AddEditFragmentFragment extends Fragment {
                 TextUtils.isEmpty(editTextLuftAusHalt.getText()) ||
                 TextUtils.isEmpty(editTextWiederholungen.getText());
     }
+
+
 }
+
+/* CODE GRAVEYARD:
+    private Uebung returnUebung;
+
+    homeViewModel.getUebungById(bundle.getInt(AddEditUebungFragment.EXTRA_UEBUNG_ID)).observe(this, new Observer<Uebung>() {
+            @Override
+            public void onChanged(Uebung uebung) {
+                returnUebung = uebung;
+            }
+        });
+
+    private void returnToUebungEditor(int uebungId){
+
+        Bundle restoreUebung = new Bundle();
+
+        Log.i(TAG, "returnToUebungEditor: " + uebungId);
+
+        Uebung baseUebung = returnUebung;
+        restoreUebung.putInt(EXTRA_ID, baseUebung.getId());
+        restoreUebung.putString(EXTRA_TITEL, baseUebung.getTitel());
+        restoreUebung.putString(EXTRA_DESC, baseUebung.getBeschreibung());
+        restoreUebung.putInt(EXTRA_PRIO, baseUebung.getPrioritaet());
+        restoreUebung.putInt(EXTRA_COUNT, baseUebung.getAnzahlDerWiederholungen());
+
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_fragment_to_nav_home_add_edit_uebung, restoreUebung);
+
+    }
+
+    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new HomeFragment());
+        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.uebung_home);
+        fragmentTransaction.commit();
+
+ */

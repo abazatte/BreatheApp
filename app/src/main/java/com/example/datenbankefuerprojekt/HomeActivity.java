@@ -1,6 +1,7 @@
 package com.example.datenbankefuerprojekt;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 
@@ -41,6 +42,10 @@ public class HomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        if(savedInstanceState == null){
+            drawer.openDrawer(Gravity.LEFT);
+        }
     }
 
     @Override
