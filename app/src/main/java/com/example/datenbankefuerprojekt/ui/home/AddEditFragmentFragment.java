@@ -167,6 +167,7 @@ public class AddEditFragmentFragment extends Fragment {
                 } else {
                     saveFragment();
                 }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

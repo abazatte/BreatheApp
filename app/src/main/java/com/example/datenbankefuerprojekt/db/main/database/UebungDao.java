@@ -25,7 +25,7 @@ public interface UebungDao {
     @Query("DELETE FROM uebung_table")
     void deleteAllUebung();
 
-    @Query("SELECT * FROM uebung_table ORDER BY prioritaet DESC")
+    @Query("SELECT * FROM uebung_table ORDER BY prioritaet ASC")
     LiveData<List<Uebung>> getAllNotes();
 
     @Query("Select * from uebung_table where id=:id")

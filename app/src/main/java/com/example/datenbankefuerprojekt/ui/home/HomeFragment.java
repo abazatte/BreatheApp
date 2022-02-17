@@ -64,12 +64,7 @@ public class HomeFragment extends Fragment {
         //homeViewModel = new HomeViewModel(getActivity().getApplication());
 
 
-        homeViewModel.getAllUebung().observe(this, new Observer<List<Uebung>>() {
-            @Override
-            public void onChanged(List<Uebung> uebungs) {
-                adapter.submitList(uebungs);
-            }
-        });
+        homeViewModel.getAllUebung().observe(this, uebungs -> adapter.submitList(uebungs));
 
         /*
          * dieses swipen
@@ -88,30 +83,27 @@ public class HomeFragment extends Fragment {
             }
         }).attachToRecyclerView(binding.recyclerView);
 
-        adapter.setOnClickListener(new UebungAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Uebung uebung) {
-                Bundle bundle = new Bundle();
-                bundle.putInt(EXTRA_ID, uebung.getId());
-                bundle.putString(EXTRA_TITEL, uebung.getTitel());
-                bundle.putString(EXTRA_DESC, uebung.getBeschreibung());
-                bundle.putInt(EXTRA_PRIO, uebung.getPrioritaet());
-                bundle.putInt(EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
-                AddEditUebungFragment addEditUebungFragment = new AddEditUebungFragment();
-                addEditUebungFragment.setArguments(bundle);
+        adapter.setOnClickListener(uebung -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt(EXTRA_ID, uebung.getId());
+            bundle.putString(EXTRA_TITEL, uebung.getTitel());
+            bundle.putString(EXTRA_DESC, uebung.getBeschreibung());
+            bundle.putInt(EXTRA_PRIO, uebung.getPrioritaet());
+            bundle.putInt(EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
+            AddEditUebungFragment addEditUebungFragment = new AddEditUebungFragment();
+            addEditUebungFragment.setArguments(bundle);
 
-                //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
-                Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, bundle);
+            //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
+            Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, bundle);
 
-                //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                //fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditUebungFragment);
-                //
-                //this breaks everything if you save or go into the weird other thing idk man
-                //fragmentTransaction.addToBackStack(null);
-                //
-                //
-                //fragmentTransaction.commit();
-            }
+            //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            //fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditUebungFragment);
+            //
+            //this breaks everything if you save or go into the weird other thing idk man
+            //fragmentTransaction.addToBackStack(null);
+            //
+            //
+            //fragmentTransaction.commit();
         });
         return root;
     }

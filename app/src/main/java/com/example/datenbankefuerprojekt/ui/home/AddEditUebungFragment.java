@@ -112,12 +112,7 @@ public class AddEditUebungFragment extends Fragment {
         binding.recyclerViewFragment.setAdapter(adapter);
 
         if (id != -1) {
-            homeViewModel.getAllFragmentsOfUebung(id).observe(this, new Observer<List<com.example.datenbankefuerprojekt.db.main.database.Fragment>>() {
-                @Override
-                public void onChanged(List<com.example.datenbankefuerprojekt.db.main.database.Fragment> fragments) {
-                    adapter.submitList(fragments);
-                }
-            });
+            homeViewModel.getAllFragmentsOfUebung(id).observe(this, fragments -> adapter.submitList(fragments));
         }
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -133,32 +128,29 @@ public class AddEditUebungFragment extends Fragment {
             }
         }).attachToRecyclerView(binding.recyclerViewFragment);
 
-        adapter.setOnClickListener(new FragmentAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(com.example.datenbankefuerprojekt.db.main.database.Fragment fragment) {
-                //TODO: hier was machen
-                Bundle bundle1 = new Bundle();
-                bundle1.putInt(HomeFragment.EXTRA_ID, fragment.getFragmentId());
-                bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitelFragment());
-                bundle1.putInt(HomeFragment.EXTRA_PRIO, fragment.getPrioritaetFragment());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_EIN, fragment.getEinAtmenZeit());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTEIN, fragment.getEinLuftanhaltZeil());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_AUS, fragment.getAusAtmenZeit());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTAUS, fragment.getAusLuftanhaltZeit());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_FRAGMENT_COUNT, fragment.getAnzahlWiederholungenFragment());
-                bundle1.putInt(AddEditUebungFragment.EXTRA_UEBUNG_ID, fragment.getUebungId());
+        adapter.setOnClickListener(fragment -> {
+            //TODO: hier was machen
+            Bundle bundle1 = new Bundle();
+            bundle1.putInt(HomeFragment.EXTRA_ID, fragment.getFragmentId());
+            bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitelFragment());
+            bundle1.putInt(HomeFragment.EXTRA_PRIO, fragment.getPrioritaetFragment());
+            bundle1.putInt(AddEditUebungFragment.EXTRA_EIN, fragment.getEinAtmenZeit());
+            bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTEIN, fragment.getEinLuftanhaltZeil());
+            bundle1.putInt(AddEditUebungFragment.EXTRA_AUS, fragment.getAusAtmenZeit());
+            bundle1.putInt(AddEditUebungFragment.EXTRA_LUFTAUS, fragment.getAusLuftanhaltZeit());
+            bundle1.putInt(AddEditUebungFragment.EXTRA_FRAGMENT_COUNT, fragment.getAnzahlWiederholungenFragment());
+            bundle1.putInt(AddEditUebungFragment.EXTRA_UEBUNG_ID, fragment.getUebungId());
 
-                Navigation.findNavController(root).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home_add_edit_fragment, bundle1);
+            Navigation.findNavController(root).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home_add_edit_fragment, bundle1);
 
 
-                /*
-                AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();
-                addEditFragmentFragment.setArguments(bundle1);
+            /*
+            AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();
+            addEditFragmentFragment.setArguments(bundle1);
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditFragmentFragment);
-                fragmentTransaction.commit();*/
-            }
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditFragmentFragment);
+            fragmentTransaction.commit();*/
         });
 
         return root;
