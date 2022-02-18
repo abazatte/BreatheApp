@@ -25,4 +25,7 @@
     <string name="delete_uebung_dialog_positive_button_label">Loeschen</string>
     <string name="delete_uebung_positive_button_message">Uebung geloescht</string>
     <string name="delete_uebung_negative_button_label">Abbrechen</string>
+    <string name="delete_all_uebung_dialog_content">Wollen sie alle Uebungen unwiderruflich loeschen?</string>
+    <string name="delete_all_uebung_dialog_positive_button_label">Alles löschen</string>
+    <string name="delete_all_uebung_dialog_positive_message">Alle Uebungen geloescht</string>
 </resources>

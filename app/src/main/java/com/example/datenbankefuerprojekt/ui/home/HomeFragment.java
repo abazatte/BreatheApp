@@ -101,8 +101,16 @@ public class HomeFragment extends Fragment {
     }
 
     public void deleteAllUebungen(){
-        homeViewModel.deleteAllUebung();
-        Toast.makeText(getActivity(), "Alle Uebungen geloescht", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.delete_all_uebung_dialog_content);
+        builder.setPositiveButton(R.string.delete_all_uebung_dialog_positive_button_label, (dialogInterface, i) -> {
+            homeViewModel.deleteAllUebung();
+            Toast.makeText(getActivity(), R.string.delete_all_uebung_dialog_positive_message, Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton(R.string.delete_uebung_negative_button_label, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
