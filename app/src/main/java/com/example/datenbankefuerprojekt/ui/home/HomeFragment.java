@@ -1,5 +1,7 @@
 package com.example.datenbankefuerprojekt.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,10 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -22,11 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentHomeBinding;
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
 import com.example.datenbankefuerprojekt.db.main.database.UebungAdapter;
-import com.example.datenbankefuerprojekt.ui.slideshow.SlideshowViewModel;
-
-import java.util.List;
 
 public class HomeFragment extends Fragment {
     public static final String EXTRA_TITEL = "com.example.datenbankefuerprojekt.ui.home.TITEL";
@@ -48,10 +43,6 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         binding.buttonAddNote.setOnClickListener(view -> {
             Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung);
-            /*
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.nav_host_fragment_content_home, new AddEditUebungFragment());
-            fragmentTransaction.commit();*/
         });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -60,8 +51,6 @@ public class HomeFragment extends Fragment {
         final UebungAdapter adapter = new UebungAdapter();
         binding.recyclerView.setAdapter(adapter);
 
-
-        //homeViewModel = new HomeViewModel(getActivity().getApplication());
 
 
         homeViewModel.getAllUebung().observe(this, uebungs -> adapter.submitList(uebungs));
@@ -78,8 +67,19 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                homeViewModel.delete(adapter.getUebungAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(),"Uebung geloescht", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Uebung Löschen")
+                        .setMessage("Möchten sie diese Uebung löschen?");
+                builder.setPositiveButton("Loeschen", (dialogInterface, i) -> {
+                    homeViewModel.delete(adapter.getUebungAt(viewHolder.getAdapterPosition()));
+                    Toast.makeText(getActivity(),"Uebung geloescht", Toast.LENGTH_SHORT).show();
+                });
+                builder.setNegativeButton("Abbrechen", ((dialogInterface, i) -> {
+                    adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                }));
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         }).attachToRecyclerView(binding.recyclerView);
 
@@ -90,20 +90,12 @@ public class HomeFragment extends Fragment {
             bundle.putString(EXTRA_DESC, uebung.getBeschreibung());
             bundle.putInt(EXTRA_PRIO, uebung.getPrioritaet());
             bundle.putInt(EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
-            AddEditUebungFragment addEditUebungFragment = new AddEditUebungFragment();
-            addEditUebungFragment.setArguments(bundle);
+            /*
+            UebungEditorFragment uebungEditorFragment = new UebungEditorFragment();
+            uebungEditorFragment.setArguments(bundle);*/
 
             //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
             Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, bundle);
-
-            //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            //fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditUebungFragment);
-            //
-            //this breaks everything if you save or go into the weird other thing idk man
-            //fragmentTransaction.addToBackStack(null);
-            //
-            //
-            //fragmentTransaction.commit();
         });
         return root;
     }

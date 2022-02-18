@@ -14,35 +14,56 @@
             android:id="@+id/action_nav_home_to_nav_home_add_edit_uebung"
             app:destination="@id/nav_home_add_edit_uebung"
             app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
         android:id="@+id/nav_home_add_edit_uebung"
-        android:name="com.example.datenbankefuerprojekt.ui.home.AddEditUebungFragment"
+        android:name="com.example.datenbankefuerprojekt.ui.home.UebungEditorFragment"
         android:label="@string/uebung_editor"
         tools:layout="@layout/fragment_add_edit_uebung"
         >
         <action
             android:id="@+id/action_nav_home_add_edit_uebung_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_home"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_home_add_edit_uebung_to_nav_home_add_edit_fragment"
-            app:destination="@id/nav_home_add_edit_fragment" />
+            app:destination="@id/nav_home_add_edit_fragment"
+
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
         android:id="@+id/nav_home_add_edit_fragment"
-        android:name="com.example.datenbankefuerprojekt.ui.home.AddEditFragmentFragment"
+        android:name="com.example.datenbankefuerprojekt.ui.home.FragmentEditorFragment"
         android:label="@string/fragment_editor"
         tools:layout="@layout/fragment_add_edit_fragment"
         >
         <action
             android:id="@+id/action_nav_home_add_edit_fragment_to_nav_home_add_edit_uebung"
-            app:destination="@id/nav_home_add_edit_uebung" />
+            app:destination="@id/nav_home_add_edit_uebung"
+
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_nav_home_add_edit_fragment_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_home"
+
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment

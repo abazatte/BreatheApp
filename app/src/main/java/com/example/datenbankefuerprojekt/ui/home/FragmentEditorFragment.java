@@ -24,7 +24,7 @@ import android.widget.Toast;
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentAddEditFragmentBinding;
 
-public class AddEditFragmentFragment extends Fragment {
+public class FragmentEditorFragment extends Fragment {
     private static String TAG = "FragmentEDITOR";
 
     private EditText editTextTitel;
@@ -65,11 +65,11 @@ public class AddEditFragmentFragment extends Fragment {
                 //((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Edit Fragment");
                 editTextTitel.setText(bundle.getString(EXTRA_TITEL));
                 editTextPrio.setText(Integer.toString(bundle.getInt(EXTRA_PRIO)));
-                editTextEinAtmen.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_EIN)));
-                editTextLuftAnhalt.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_LUFTEIN)));
-                editTextAusAtem.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_AUS)));
-                editTextLuftAusHalt.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_LUFTAUS)));
-                editTextWiederholungen.setText(Integer.toString(bundle.getInt(AddEditUebungFragment.EXTRA_FRAGMENT_COUNT)));
+                editTextEinAtmen.setText(Integer.toString(bundle.getInt(UebungEditorFragment.EXTRA_EIN)));
+                editTextLuftAnhalt.setText(Integer.toString(bundle.getInt(UebungEditorFragment.EXTRA_LUFTEIN)));
+                editTextAusAtem.setText(Integer.toString(bundle.getInt(UebungEditorFragment.EXTRA_AUS)));
+                editTextLuftAusHalt.setText(Integer.toString(bundle.getInt(UebungEditorFragment.EXTRA_LUFTAUS)));
+                editTextWiederholungen.setText(Integer.toString(bundle.getInt(UebungEditorFragment.EXTRA_FRAGMENT_COUNT)));
 
                 Toast.makeText(getActivity(), "Titel: " + editTextTitel.getText().toString() + "Prio: " + editTextPrio.getText().toString() , Toast.LENGTH_LONG).show();
 
@@ -113,7 +113,7 @@ public class AddEditFragmentFragment extends Fragment {
         int luftaus = Integer.parseInt(editTextLuftAusHalt.getText().toString());
         int count = Integer.parseInt(editTextWiederholungen.getText().toString());
         //da die id nur intern ist, muss es aus dem Bundle entnommen werden
-        int uebungId = bundle.getInt(AddEditUebungFragment.EXTRA_UEBUNG_ID);
+        int uebungId = bundle.getInt(UebungEditorFragment.EXTRA_UEBUNG_ID);
 
 
         //in die datenbank einfügen
@@ -140,7 +140,7 @@ public class AddEditFragmentFragment extends Fragment {
         int ausatmen = Integer.parseInt(editTextAusAtem.getText().toString());
         int luftaus = Integer.parseInt(editTextLuftAusHalt.getText().toString());
         int count = Integer.parseInt(editTextWiederholungen.getText().toString());
-        int uebungId = bundle.getInt(AddEditUebungFragment.EXTRA_UEBUNG_ID);
+        int uebungId = bundle.getInt(UebungEditorFragment.EXTRA_UEBUNG_ID);
 
 
 
