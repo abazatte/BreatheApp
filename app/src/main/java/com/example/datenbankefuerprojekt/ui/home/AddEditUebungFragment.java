@@ -25,6 +25,7 @@ import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentAddEditUebungBinding;
 import com.example.datenbankefuerprojekt.db.main.database.FragmentAdapter;
 import com.example.datenbankefuerprojekt.db.main.database.Uebung;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -67,43 +68,35 @@ public class AddEditUebungFragment extends Fragment {
 
         Bundle bundle = getArguments();
 
-        binding.buttonAddFragment.setVisibility(View.INVISIBLE);
-
-        //vlt kann man das auch lösen iwie mit navigation????
-        //((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.add_uebung);
-        //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
+        //binding.buttonAddFragment.setVisibility(View.INVISIBLE);
 
         if (bundle != null) {
             id = bundle.getInt(HomeFragment.EXTRA_ID, -1);
-            //((AppCompatActivity) getContext()).getSupportActionBar().setTitle(R.string.edit_uebung);
-
             if (id != -1) {
                 editTextTitel.setText(bundle.getString(HomeFragment.EXTRA_TITEL));
                 editTextDesc.setText(bundle.getString(HomeFragment.EXTRA_DESC));
                 editTextUebungPriority.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_PRIO)));
                 editTextUebungCount.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_COUNT)));
                 isEdit = true;
-                binding.buttonAddFragment.setVisibility(View.VISIBLE);
+                //binding.buttonAddFragment.setVisibility(View.VISIBLE);
             }
         }
 
-        binding.buttonAddFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if(isEdit){
+            binding.buttonAddFragment.setOnClickListener(view -> {
                 Bundle bundle1 = new Bundle();
                 bundle1.putInt(EXTRA_UEBUNG_ID, id);
 
                 Navigation.findNavController(root).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home_add_edit_fragment, bundle1);
-                /*
-                AddEditFragmentFragment addEditFragmentFragment = new AddEditFragmentFragment();
-                addEditFragmentFragment.setArguments(bundle1);
+            });
+        } else {
+            binding.buttonAddFragment.setOnClickListener(view ->
+                    Snackbar.make(binding.getRoot(),"Bitte die Übung einmal Abspeichern bevor Sie ein Fragment hinzufügen", Snackbar.LENGTH_LONG).show());
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_content_home, addEditFragmentFragment);
-                //fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
-            }
-        });
+        }
+
+
+
 
         binding.recyclerViewFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerViewFragment.setHasFixedSize(true);
