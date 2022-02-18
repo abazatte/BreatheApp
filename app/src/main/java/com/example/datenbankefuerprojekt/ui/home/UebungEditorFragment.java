@@ -231,13 +231,13 @@ public class UebungEditorFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Fragment Löschen")
-                        .setMessage("Möchten sie dieses Fragment löschen?");
-                builder.setPositiveButton("Loeschen", (dialogInterface, i) -> {
+                builder.setTitle(R.string.delete_fragment_dialog_title)
+                        .setMessage(R.string.delete_fragment_dialog_content);
+                builder.setPositiveButton(R.string.delete_fragment_dialog_positive_button_label, (dialogInterface, i) -> {
                     homeViewModel.deleteFragment(adapter.getFragmentAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(getActivity(),"Fragment geloescht", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.delete_fragment_success_message, Toast.LENGTH_SHORT).show();
                 });
-                builder.setNegativeButton("Abbrechen", ((dialogInterface, i) -> {
+                builder.setNegativeButton(R.string.delete_fragment_dialog_negative_button_label, ((dialogInterface, i) -> {
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }));
 

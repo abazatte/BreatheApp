@@ -15,4 +15,14 @@
     <string name="uebung_home">Home</string>
     <string name="uebung_editor">Uebung Editor</string>
     <string name="fragment_editor">Fragment Editor</string>
+    <string name="delete_fragment_dialog_title">Fragment Löschen</string>
+    <string name="delete_fragment_dialog_content">Möchten sie dieses Fragment löschen?</string>
+    <string name="delete_fragment_dialog_positive_button_label">Loeschen</string>
+    <string name="delete_fragment_success_message">Fragment geloescht</string>
+    <string name="delete_fragment_dialog_negative_button_label">Abbrechen</string>
+    <string name="delete_uebung_dialog_title">Uebung Löschen</string>
+    <string name="delete_uebung_dialog_content">Möchten sie diese Uebung löschen?</string>
+    <string name="delete_uebung_dialog_positive_button_label">Loeschen</string>
+    <string name="delete_uebung_positive_button_message">Uebung geloescht</string>
+    <string name="delete_uebung_negative_button_label">Abbrechen</string>
 </resources>

@@ -68,13 +68,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Uebung Löschen")
-                        .setMessage("Möchten sie diese Uebung löschen?");
-                builder.setPositiveButton("Loeschen", (dialogInterface, i) -> {
+                builder.setTitle(R.string.delete_uebung_dialog_title)
+                        .setMessage(R.string.delete_uebung_dialog_content);
+                builder.setPositiveButton(R.string.delete_uebung_dialog_positive_button_label, (dialogInterface, i) -> {
                     homeViewModel.delete(adapter.getUebungAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(getActivity(),"Uebung geloescht", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.delete_uebung_positive_button_message, Toast.LENGTH_SHORT).show();
                 });
-                builder.setNegativeButton("Abbrechen", ((dialogInterface, i) -> {
+                builder.setNegativeButton(R.string.delete_uebung_negative_button_label, ((dialogInterface, i) -> {
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }));
 
