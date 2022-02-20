@@ -1,19 +1,34 @@
 package com.example.datenbankefuerprojekt.ui.gallery;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+import com.example.datenbankefuerprojekt.db.main.database.ControlPause;
+import com.example.datenbankefuerprojekt.db.main.database.ControlPauseRepository;
 
-    private MutableLiveData<String> mText;
+import java.util.List;
 
-    public GalleryViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+public class GalleryViewModel extends AndroidViewModel {
+
+    private ControlPauseRepository repository;
+    private LiveData<List<ControlPause>> allControlPause;
+
+    public GalleryViewModel(@NonNull Application application) {
+        super(application);
+        this.repository = new ControlPauseRepository(application);
+        this.allControlPause = repository.getAlleControlPause();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void insert(ControlPause controlPause) {
+        repository.insertControlPause(controlPause);
+    }
+
+    public LiveData<List<ControlPause>> getAllControlPause() {
+        return allControlPause;
     }
 }
