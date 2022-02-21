@@ -20,8 +20,9 @@ public class ControlPause {
         this.date = date;
         this.laenge = laenge;
     }
-    public void setControlPauseId(int id){
-        this.controlPauseId= id;
+
+    public void setControlPauseId(int controlPauseId) {
+        this.controlPauseId = controlPauseId;
     }
 
     public int getControlPauseId() {
