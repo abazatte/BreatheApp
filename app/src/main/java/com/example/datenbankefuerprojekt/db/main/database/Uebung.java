@@ -16,11 +16,25 @@ public class Uebung {
 
     private int prioritaet;
 
-    public Uebung(String titel, String beschreibung, int anzahlDerWiederholungen, int prioritaet){
+    private boolean useTimed;
+
+    private int timeInSeconds;
+
+    public Uebung(String titel, String beschreibung, int anzahlDerWiederholungen, int prioritaet, boolean useTimed, int timeInSeconds){
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahlDerWiederholungen = anzahlDerWiederholungen;
         this.prioritaet = prioritaet;
+        this.useTimed = useTimed;
+        this.timeInSeconds = timeInSeconds; //hier default value 0?
+    }
+
+    public void setUseTimed(boolean useTimed) {
+        this.useTimed = useTimed;
+    }
+
+    public void setTimeInSeconds(int timeInSeconds) {
+        this.timeInSeconds = timeInSeconds;
     }
 
     public void setId(int id) {
@@ -45,5 +59,13 @@ public class Uebung {
 
     public int getPrioritaet() {
         return prioritaet;
+    }
+
+    public boolean getUseTimed() {
+        return useTimed;
+    }
+
+    public int getTimeInSeconds() {
+        return timeInSeconds;
     }
 }

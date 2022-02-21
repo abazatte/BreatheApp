@@ -1,7 +1,6 @@
 package com.example.datenbankefuerprojekt.ui.home;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentHomeBinding;
+import com.example.datenbankefuerprojekt.db.main.database.Uebung;
 import com.example.datenbankefuerprojekt.db.main.database.UebungAdapter;
 
 public class HomeFragment extends Fragment {
@@ -29,6 +29,8 @@ public class HomeFragment extends Fragment {
     public static final String EXTRA_DESC = "com.example.datenbankefuerprojekt.ui.home.DESC";
     public static final String EXTRA_PRIO = "com.example.datenbankefuerprojekt.ui.home.PRIO";
     public static final String EXTRA_COUNT = "com.example.datenbankefuerprojekt.ui.home.COUNT";
+    public static final String EXTRA_USE_SECONDS = "com.example.datenbankefuerprojekt.ui.home.USE_SECONDS";
+    public static final String EXTRA_SECONDS = "com.example.datenbankefuerprojekt.ui.home.SECONDS";
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
@@ -83,20 +85,15 @@ public class HomeFragment extends Fragment {
             }
         }).attachToRecyclerView(binding.recyclerView);
 
-        adapter.setOnClickListener(uebung -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt(EXTRA_ID, uebung.getId());
-            bundle.putString(EXTRA_TITEL, uebung.getTitel());
-            bundle.putString(EXTRA_DESC, uebung.getBeschreibung());
-            bundle.putInt(EXTRA_PRIO, uebung.getPrioritaet());
-            bundle.putInt(EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
-            /*
-            UebungEditorFragment uebungEditorFragment = new UebungEditorFragment();
-            uebungEditorFragment.setArguments(bundle);*/
-
+        adapter.setEditButtonClickListener(uebung -> {
             //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
-            Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, bundle);
+            Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, prepareUebungBundle(uebung));
         });
+        /*
+        adapter.setOnItemClickListener(uebung -> {
+            Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, prepareUebungBundle(uebung));
+            //hier nach animations fragment navigieren
+        });*/
         return root;
     }
 
@@ -128,6 +125,19 @@ public class HomeFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private Bundle prepareUebungBundle(Uebung uebung){
+        Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_ID, uebung.getId());
+        bundle.putString(EXTRA_TITEL, uebung.getTitel());
+        bundle.putString(EXTRA_DESC, uebung.getBeschreibung());
+        bundle.putInt(EXTRA_PRIO, uebung.getPrioritaet());
+        bundle.putInt(EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
+        bundle.putBoolean(EXTRA_USE_SECONDS, uebung.getUseTimed());
+        bundle.putInt(EXTRA_SECONDS, uebung.getTimeInSeconds());
+
+        return bundle;
     }
 }
 /*

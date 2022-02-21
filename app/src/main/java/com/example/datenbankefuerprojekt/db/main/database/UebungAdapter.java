@@ -1,11 +1,9 @@
 package com.example.datenbankefuerprojekt.db.main.database;
 
-import static android.os.Build.VERSION_CODES.R;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.datenbankefuerprojekt.R;
 
 public class UebungAdapter extends ListAdapter<Uebung, UebungAdapter.UebungHolder> {
-    private OnItemClickListener listener;
+    private OnItemClickListener itemClickListener;
+    private OnEditButtonClickListener editButtonClickListener;
 
     public UebungAdapter() {
         super(DIFF_CALLBACK);
@@ -63,6 +62,10 @@ public class UebungAdapter extends ListAdapter<Uebung, UebungAdapter.UebungHolde
         private TextView textViewBeschreibung;
         private TextView textViewPrioritaet;
         private TextView textViewAnzahl;
+        private Button editButton;
+        //hier noch textview duration wenn useTimed auf true ist
+        //das iwie mit invisible und visible lösen!
+
 
         public UebungHolder(@NonNull View itemView){
             super(itemView);
@@ -70,14 +73,18 @@ public class UebungAdapter extends ListAdapter<Uebung, UebungAdapter.UebungHolde
             textViewBeschreibung = itemView.findViewById(com.example.datenbankefuerprojekt.R.id.text_view_description);
             textViewPrioritaet = itemView.findViewById(com.example.datenbankefuerprojekt.R.id.text_view_priority);
             textViewAnzahl = itemView.findViewById(com.example.datenbankefuerprojekt.R.id.text_view_counter);
+            editButton = itemView.findViewById(R.id.button_edit);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    if (listener != null && position != RecyclerView.NO_POSITION){
-                        listener.onItemClick(getItem(position));
-                    }
+            itemView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                if (itemClickListener != null && position != RecyclerView.NO_POSITION){
+                    itemClickListener.onItemClick(getItem(position));
+                }
+            });
+            editButton.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                if(editButtonClickListener != null && position != RecyclerView.NO_POSITION){
+                    editButtonClickListener.onEditButtonClick(getItem(position));
                 }
             });
         }
@@ -87,7 +94,15 @@ public class UebungAdapter extends ListAdapter<Uebung, UebungAdapter.UebungHolde
         void onItemClick(Uebung uebung);
     }
 
-    public void setOnClickListener(OnItemClickListener listener){
-        this.listener = listener;
+    public interface OnEditButtonClickListener{
+        void onEditButtonClick(Uebung uebung);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.itemClickListener = listener;
+    }
+
+    public void setEditButtonClickListener(OnEditButtonClickListener listener){
+        this.editButtonClickListener = listener;
     }
 }

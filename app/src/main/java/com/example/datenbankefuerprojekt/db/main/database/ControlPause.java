@@ -11,6 +11,7 @@ public class ControlPause {
     @PrimaryKey(autoGenerate = true)
     private int controlPauseId;
 
+    //hier mit date und typeconverter
     private String date;
 
     private int laenge;
@@ -18,6 +19,9 @@ public class ControlPause {
     public ControlPause(String date, int laenge){
         this.date = date;
         this.laenge = laenge;
+    }
+    public void setControlPauseId(int id){
+        this.controlPauseId= id;
     }
 
     public int getControlPauseId() {

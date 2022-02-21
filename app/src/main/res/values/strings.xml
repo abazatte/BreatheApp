@@ -28,4 +28,8 @@
     <string name="delete_all_uebung_dialog_content">Wollen sie alle Uebungen unwiderruflich loeschen?</string>
     <string name="delete_all_uebung_dialog_positive_button_label">Alles löschen</string>
     <string name="delete_all_uebung_dialog_positive_message">Alle Uebungen geloescht</string>
+    <string name="use_time">Zeit benutzen?</string>
+    <string name="uebung_title">Titel</string>
+    <string name="uebung_description">Beschreibung</string>
+    <string name="button_edit">Edit</string>
 </resources>

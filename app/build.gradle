@@ -33,8 +33,10 @@ android {
 dependencies {
     def room_version = "2.4.1"
     def nav_version = "2.4.0"
+    def lottieVersion = "4.2.2"
+    implementation files('\\libs\\MPAndroidChart-v3.1.0.aar')
 
-
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"

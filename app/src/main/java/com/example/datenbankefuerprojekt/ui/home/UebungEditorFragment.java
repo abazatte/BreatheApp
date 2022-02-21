@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.example.datenbankefuerprojekt.databinding.FragmentAddEditUebungBindin
 import com.example.datenbankefuerprojekt.db.main.database.FragmentAdapter;
 import com.example.datenbankefuerprojekt.db.main.database.Uebung;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class UebungEditorFragment extends Fragment {
 
@@ -41,6 +43,9 @@ public class UebungEditorFragment extends Fragment {
     private EditText editTextDesc;
     private EditText editTextUebungPriority;
     private EditText editTextUebungCount;
+    private EditText editTextMinutes;
+    private EditText editTextSeconds;
+    private SwitchMaterial useTimeSwitch;
 
     private FragmentAddEditUebungBinding binding;
     private HomeViewModel homeViewModel;
@@ -62,6 +67,8 @@ public class UebungEditorFragment extends Fragment {
 
         initMemberVariables();
         receiveBundleAndInitEditTextFields();
+        setBorderOfEditTexts(useTimeSwitch.isChecked());
+        setOnChangedListenerForTimeSwitch();
         setClickListenerForAddFragmentButton();
         initRecyclerView();
 
@@ -71,7 +78,45 @@ public class UebungEditorFragment extends Fragment {
     /**
      * @author Abdurrahman Azattemür, Maximilian Jaesch
      * <p></p>
-     * Extrahiert die Werte aus den EditText-Feldern und speichtert sie in der Datenbank als neue Uebung-Entität ab
+     * <p>Member-Variablen werden von dem binding initialisiert</p>
+     * */
+    private void initMemberVariables(){
+        editTextTitel = binding.editTextTitle;
+        editTextDesc = binding.editTextDescription;
+        editTextUebungPriority = binding.numberPickerPriority;
+        editTextUebungCount = binding.counter;
+        editTextMinutes = binding.editTextMinutes;
+        editTextSeconds = binding.editTextSeconds;
+        useTimeSwitch = binding.switchUseSeconds;
+
+        isEdit = false;
+    }
+
+    private void setOnChangedListenerForTimeSwitch(){
+        useTimeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                setBorderOfEditTexts(isChecked);
+            }
+        });
+    }
+
+    private void setBorderOfEditTexts(boolean timeSwitchIsChecked){
+        if(timeSwitchIsChecked){
+            editTextMinutes.setBackgroundResource(R.drawable.green_border);
+            editTextSeconds.setBackgroundResource(R.drawable.green_border);
+            editTextUebungCount.setBackgroundResource(android.R.drawable.edit_text);
+        } else{
+            editTextMinutes.setBackgroundResource(android.R.drawable.edit_text);
+            editTextSeconds.setBackgroundResource(android.R.drawable.edit_text);
+            editTextUebungCount.setBackgroundResource(R.drawable.green_border);
+        }
+    }
+
+    /**
+     * @author Abdurrahman Azattemür, Maximilian Jaesch
+     * <p></p>
+     * Extrahiert die Werte aus den EditText-Feldern und speichert sie in der Datenbank als neue Uebung-Entität ab
      * */
     private void saveUebung() {
         if (isAFieldEmpty()) {
@@ -82,12 +127,28 @@ public class UebungEditorFragment extends Fragment {
         String titel = editTextTitel.getText().toString();
         String desc = editTextDesc.getText().toString();
         int prio = Integer.parseInt(editTextUebungPriority.getText().toString());
-        int count = Integer.parseInt(editTextUebungCount.getText().toString());
-        if (titel.trim().isEmpty() || desc.trim().isEmpty()) {
-            Toast.makeText(getActivity(), "Bitte Titel und Beschreibung hinzufuegen.", Toast.LENGTH_SHORT).show();
-            return;
+        int count = 0;
+        if(!TextUtils.isEmpty(editTextUebungCount.getText())){
+            count = Integer.parseInt(editTextUebungCount.getText().toString());
         }
-        Uebung uebung = new Uebung(titel, desc, count, prio);
+        boolean useTimed = useTimeSwitch.isChecked();
+        int secondsInput=0;
+        int minutesInput=0;
+        int secondsComplete=0;
+        if(!TextUtils.isEmpty(editTextSeconds.getText())){
+            secondsInput = Integer.parseInt(editTextSeconds.getText().toString());
+        }
+        if(!TextUtils.isEmpty(editTextMinutes.getText())){
+            minutesInput = Integer.parseInt(editTextMinutes.getText().toString());
+        }
+        if((secondsInput != 0) ||(minutesInput!=0)){
+            if(secondsInput < 0) secondsInput *= -1;
+            if(minutesInput < 0) minutesInput *= -1;
+            secondsComplete = secondsInput + (minutesInput*60);
+        }
+
+
+        Uebung uebung = new Uebung(titel, desc, count, prio, useTimed, secondsComplete);
         homeViewModel.insert(uebung);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home);
     }
@@ -107,11 +168,24 @@ public class UebungEditorFragment extends Fragment {
         String desc = editTextDesc.getText().toString();
         int prio = Integer.parseInt(editTextUebungPriority.getText().toString());
         int count = Integer.parseInt(editTextUebungCount.getText().toString());
-        if (titel.trim().isEmpty() || desc.trim().isEmpty()) {
-            Toast.makeText(getActivity(), "Bitte Titel und Beschreibung hinzufuegen.", Toast.LENGTH_SHORT).show();
-            return;
+        boolean useTimed = useTimeSwitch.isChecked();
+        int secondsInput=0;
+        int minutesInput=0;
+        int secondsComplete=0;
+        if(!TextUtils.isEmpty(editTextSeconds.getText())){
+            secondsInput = Integer.parseInt(editTextSeconds.getText().toString());
         }
-        Uebung uebung = new Uebung(titel, desc, count, prio);
+        if(!TextUtils.isEmpty(editTextMinutes.getText())){
+            minutesInput = Integer.parseInt(editTextMinutes.getText().toString());
+        }
+        if((secondsInput != 0) ||(minutesInput!=0)){
+            if(secondsInput < 0) secondsInput *= -1;
+            if(minutesInput < 0) minutesInput *= -1;
+            secondsComplete = secondsInput + (minutesInput*60);
+        }
+
+
+        Uebung uebung = new Uebung(titel, desc, count, prio,useTimed,secondsComplete);
         uebung.setId(id);
         homeViewModel.update(uebung);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home);
@@ -149,12 +223,12 @@ public class UebungEditorFragment extends Fragment {
      * <p></p>
      * <p>Hilfsmethode die überprüft ob mindestens ein EditText-Feld leer ist. In der Datenbank sind keine null Werte erlaubt.
      * </p>
+     * <p>minuten und sekunden werden ignorier, und wenn es leer ist stattdessen eine default value von 0 benutzt!</p>
      * */
     private boolean isAFieldEmpty(){
         return TextUtils.isEmpty(editTextTitel.getText()) ||
                 TextUtils.isEmpty(editTextDesc.getText()) ||
-                TextUtils.isEmpty(editTextUebungCount.getText()) ||
-                TextUtils.isEmpty(editTextUebungPriority.getText());
+                TextUtils.isEmpty(editTextUebungPriority.getText()) ;
     }
 
     /**
@@ -177,18 +251,7 @@ public class UebungEditorFragment extends Fragment {
         return bundle1;
     }
 
-    /**
-     * @author Abdurrahman Azattemür, Maximilian Jaesch
-     * <p></p>
-     * <p>Member-Variablen werden von dem binding initialisiert</p>
-     * */
-    private void initMemberVariables(){
-        editTextTitel = binding.editTextTitle;
-        editTextDesc = binding.editTextDescription;
-        editTextUebungPriority = binding.numberPickerPriority;
-        editTextUebungCount = binding.counter;
-        isEdit = false;
-    }
+
 
     /**
      * @author Abdurrahman Azattemür, Maximilian Jaesch
@@ -206,6 +269,12 @@ public class UebungEditorFragment extends Fragment {
                 editTextDesc.setText(bundle.getString(HomeFragment.EXTRA_DESC));
                 editTextUebungPriority.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_PRIO)));
                 editTextUebungCount.setText(Integer.toString(bundle.getInt(HomeFragment.EXTRA_COUNT)));
+                useTimeSwitch.setChecked(bundle.getBoolean(HomeFragment.EXTRA_USE_SECONDS));
+                int timeInSeconds = bundle.getInt(HomeFragment.EXTRA_SECONDS);
+                int seconds = timeInSeconds % 60;
+                int minutes = timeInSeconds / 60;
+                editTextSeconds.setText(Integer.toString(seconds));
+                editTextMinutes.setText(Integer.toString(minutes));
                 isEdit = true;
             }
         }
@@ -275,6 +344,8 @@ public class UebungEditorFragment extends Fragment {
 
         }
     }
+
+
 }
 
 
