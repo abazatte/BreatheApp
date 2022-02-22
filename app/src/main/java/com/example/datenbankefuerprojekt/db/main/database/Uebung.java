@@ -20,13 +20,16 @@ public class Uebung {
 
     private int timeInSeconds;
 
-    public Uebung(String titel, String beschreibung, int anzahlDerWiederholungen, int prioritaet, boolean useTimed, int timeInSeconds){
+    private int animationSpinnerPosition;
+
+    public Uebung(String titel, String beschreibung, int anzahlDerWiederholungen, int prioritaet, boolean useTimed, int timeInSeconds, int animationSpinnerPosition){
         this.titel = titel;
         this.beschreibung = beschreibung;
         this.anzahlDerWiederholungen = anzahlDerWiederholungen;
         this.prioritaet = prioritaet;
         this.useTimed = useTimed;
         this.timeInSeconds = timeInSeconds; //hier default value 0?
+        this.animationSpinnerPosition = animationSpinnerPosition;
     }
 
     public void setUseTimed(boolean useTimed) {
@@ -67,5 +70,9 @@ public class Uebung {
 
     public int getTimeInSeconds() {
         return timeInSeconds;
+    }
+
+    public int getAnimationSpinnerPosition() {
+        return animationSpinnerPosition;
     }
 }

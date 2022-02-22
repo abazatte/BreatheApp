@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
     public static final String EXTRA_COUNT = "com.example.datenbankefuerprojekt.ui.home.COUNT";
     public static final String EXTRA_USE_SECONDS = "com.example.datenbankefuerprojekt.ui.home.USE_SECONDS";
     public static final String EXTRA_SECONDS = "com.example.datenbankefuerprojekt.ui.home.SECONDS";
+    public static final String EXTRA_SPINNER_POSITION = "com.example.datenbankefuerprojekt.ui.home.SPINNER_POSITION";
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
@@ -93,6 +94,7 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(uebung -> {
             Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, prepareUebungBundle(uebung));
             //hier nach animations fragment navigieren
+            //if abfrage, wenn progressbar, dann progressbarFragment, sonst AnimationFragment
         });*/
         return root;
     }
@@ -136,6 +138,7 @@ public class HomeFragment extends Fragment {
         bundle.putInt(EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
         bundle.putBoolean(EXTRA_USE_SECONDS, uebung.getUseTimed());
         bundle.putInt(EXTRA_SECONDS, uebung.getTimeInSeconds());
+        bundle.putInt(EXTRA_SPINNER_POSITION, uebung.getAnimationSpinnerPosition());
 
         return bundle;
     }

@@ -45,9 +45,9 @@ public abstract class UebungDatenbank extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            uebungDao.insert(new Uebung("Title 1", "Description 1", 1,1,false,0));
-            uebungDao.insert(new Uebung("Title 2", "Description 2", 1,1,false,0));
-            uebungDao.insert(new Uebung("Title 3", "Description 3", 1,1,false,0));
+            uebungDao.insert(new Uebung("Title 1", "Description 1", 1,1,false,0,1));
+            uebungDao.insert(new Uebung("Title 2", "Description 2", 1,1,false,0,1));
+            uebungDao.insert(new Uebung("Title 3", "Description 3", 1,1,false,0,1));
             return null;
         }
     }

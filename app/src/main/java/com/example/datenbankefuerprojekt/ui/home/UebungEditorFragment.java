@@ -18,8 +18,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.datenbankefuerprojekt.R;
@@ -46,6 +48,7 @@ public class UebungEditorFragment extends Fragment {
     private EditText editTextMinutes;
     private EditText editTextSeconds;
     private SwitchMaterial useTimeSwitch;
+    private Spinner animationSpinner;
 
     private FragmentAddEditUebungBinding binding;
     private HomeViewModel homeViewModel;
@@ -88,6 +91,7 @@ public class UebungEditorFragment extends Fragment {
         editTextMinutes = binding.editTextMinutes;
         editTextSeconds = binding.editTextSeconds;
         useTimeSwitch = binding.switchUseSeconds;
+        animationSpinner = binding.animationSpinner;
 
         isEdit = false;
     }
@@ -119,8 +123,7 @@ public class UebungEditorFragment extends Fragment {
      * Extrahiert die Werte aus den EditText-Feldern und speichert sie in der Datenbank als neue Uebung-Entität ab
      * */
     private void saveUebung() {
-        if (isAFieldEmpty()) {
-            Toast.makeText(getActivity(), "Bitte jedes Feld ausfüllen", Toast.LENGTH_SHORT).show();
+        if(!areAllInputsValid()){
             return;
         }
 
@@ -148,7 +151,7 @@ public class UebungEditorFragment extends Fragment {
         }
 
 
-        Uebung uebung = new Uebung(titel, desc, count, prio, useTimed, secondsComplete);
+        Uebung uebung = new Uebung(titel, desc, count, prio, useTimed, secondsComplete, animationSpinner.getSelectedItemPosition());
         homeViewModel.insert(uebung);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home);
     }
@@ -159,8 +162,7 @@ public class UebungEditorFragment extends Fragment {
      * gleich wie saveUebung, aber es wird ein Record in der Datenbank aktualisiert anstatt das ein neuer Eintrag erstellt wird.
      * */
     private void updateUebung() {
-        if (isAFieldEmpty()) {
-            Toast.makeText(getActivity(), "Bitte jedes Feld ausfüllen", Toast.LENGTH_SHORT).show();
+        if(!areAllInputsValid()){
             return;
         }
 
@@ -185,7 +187,7 @@ public class UebungEditorFragment extends Fragment {
         }
 
 
-        Uebung uebung = new Uebung(titel, desc, count, prio,useTimed,secondsComplete);
+        Uebung uebung = new Uebung(titel, desc, count, prio,useTimed,secondsComplete,animationSpinner.getSelectedItemPosition());
         uebung.setId(id);
         homeViewModel.update(uebung);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_add_edit_uebung_to_nav_home);
@@ -231,6 +233,23 @@ public class UebungEditorFragment extends Fragment {
                 TextUtils.isEmpty(editTextUebungPriority.getText()) ;
     }
 
+    private boolean isSpinnerInDefaultPos(){
+        return animationSpinner.getSelectedItemPosition() == 0;
+    }
+
+    private boolean areAllInputsValid(){
+        boolean valid = true;
+        if (isAFieldEmpty()) {
+            Toast.makeText(getActivity(), "Bitte jedes Feld ausfüllen", Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        if(isSpinnerInDefaultPos()){
+            Toast.makeText(getActivity(), "Bitte eine Animation auswählen", Toast.LENGTH_SHORT).show();
+            valid = false;
+        }
+        return valid;
+    }
+
     /**
      * @author Abdurrahman Azattemür, Maximilian Jaesch
      * <p></p>
@@ -260,7 +279,10 @@ public class UebungEditorFragment extends Fragment {
      */
     private void receiveBundleAndInitEditTextFields(){
         Bundle bundle = getArguments();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.animations_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        animationSpinner.setAdapter(adapter);
 
         if (bundle != null) {
             id = bundle.getInt(HomeFragment.EXTRA_ID, -1);
@@ -276,6 +298,8 @@ public class UebungEditorFragment extends Fragment {
                 editTextSeconds.setText(Integer.toString(seconds));
                 editTextMinutes.setText(Integer.toString(minutes));
                 isEdit = true;
+
+                animationSpinner.setSelection(bundle.getInt(HomeFragment.EXTRA_SPINNER_POSITION));
             }
         }
     }

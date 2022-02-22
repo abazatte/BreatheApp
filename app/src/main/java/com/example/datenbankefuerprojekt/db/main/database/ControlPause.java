@@ -16,9 +16,9 @@ public class ControlPause {
     //hier mit date und typeconverter
     private Date date;
 
-    private int laenge;
+    private long laenge;
 
-    public ControlPause(Date date, int laenge){
+    public ControlPause(Date date, long laenge){
         this.date = date;
         this.laenge = laenge;
     }
@@ -35,7 +35,7 @@ public class ControlPause {
         return date;
     }
 
-    public int getLaenge() {
+    public long getLaenge() {
         return laenge;
     }
 }

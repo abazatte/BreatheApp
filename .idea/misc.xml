@@ -3,24 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/activity_home.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/controlpause_item.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/fragment_add_edit_uebung.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/fragment_gallery.xml" value="0.2289156626506024" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/fragment_item.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/stopwatch_fragment2.xml" value="0.1" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/layout/uebung_item.xml" value="0.1" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/green_border.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_breathe_icon_fix.xml" value="0.2651282051282051" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_breathe_lightbackground.xml" value="0.2651282051282051" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/splash_background.xml" value="0.264" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/animation_fragment.xml" value="0.264" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/app_bar_home.xml" value="0.253125" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/content_home.xml" value="0.253125" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_add_edit_fragment.xml" value="0.4" />
-        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_add_edit_uebung.xml" value="0.4430264357338195" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_add_edit_uebung.xml" value="0.11761083743842364" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_gallery.xml" value="0.253125" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_item.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/stopwatch_fragment2.xml" value="0.12916666666666668" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/uebung_item.xml" value="0.536" />
       </map>
     </option>
@@ -30,12 +24,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.1" />
-      </ProjectState>
-    </option>
   </component>
 </project>

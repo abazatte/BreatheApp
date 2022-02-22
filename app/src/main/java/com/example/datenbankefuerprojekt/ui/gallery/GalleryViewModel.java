@@ -13,26 +13,29 @@ import com.example.datenbankefuerprojekt.db.main.database.ControlPauseRepository
 
 import java.util.List;
 
-public class GalleryViewModel extends ViewModel {
+public class GalleryViewModel extends AndroidViewModel {
 
     private Long pauseOffset;
     private Long startTime;
     private StopwatchState state;
+
+    private MutableLiveData<Long> savedTime;
 
     private ControlPauseRepository repository;
     private LiveData<List<ControlPause>> allControlPauseByDate;
     private LiveData<List<ControlPause>> allControlPauseByLaenge;
 
     public GalleryViewModel(@NonNull Application application) {
+        super(application);
         this.repository = new ControlPauseRepository(application);
         this.allControlPauseByDate = repository.getAlleControlPauseByDate();
         this.allControlPauseByLaenge = repository.getAlleControlPauseByLaenge();
-    }
+        savedTime = new MutableLiveData<>(0L);
 
-    public GalleryViewModel(){
         pauseOffset = (long) 0;
         state = StopwatchState.stopped;
     }
+
 
     public void insert(ControlPause controlPause) {
         repository.insertControlPause(controlPause);
@@ -44,6 +47,10 @@ public class GalleryViewModel extends ViewModel {
 
     public LiveData<List<ControlPause>> getAllControlPauseByLaenge() {
         return allControlPauseByLaenge;
+    }
+
+    public void setSavedTime(Long savedTime) {
+        this.savedTime.setValue(savedTime);
     }
 
     public void setPauseOffset(Long pauseOffset) {
@@ -71,5 +78,8 @@ public class GalleryViewModel extends ViewModel {
         return pauseOffset;
     }
 
+    public LiveData<Long> getSavedTime(){
+        return savedTime;
+    }
 
 }

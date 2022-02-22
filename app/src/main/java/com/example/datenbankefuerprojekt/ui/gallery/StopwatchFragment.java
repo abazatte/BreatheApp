@@ -1,5 +1,6 @@
 package com.example.datenbankefuerprojekt.ui.gallery;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -15,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Chronometer;
 
 import com.example.datenbankefuerprojekt.databinding.StopwatchFragment2Binding;
+import com.example.datenbankefuerprojekt.db.main.database.ControlPause;
+
+import java.util.Calendar;
 
 
 public class StopwatchFragment extends Fragment {
@@ -22,23 +26,10 @@ public class StopwatchFragment extends Fragment {
     private GalleryViewModel mViewModel;
 
     private Chronometer chronometer;
-    private boolean running;
-    private long pauseOffset;
 
     public static StopwatchFragment newInstance() {
         return new StopwatchFragment();
     }
-
-    /* ABSOLUTE KACKE
-        DAS GEHT NICH MIT VIEWMODEL
-        ALSO VERTICAL ORIENTATION FORCEN
-
-        oder git gud??
-        weil dann kann man locken und es geht weiter
-
-
-
-     */
 
     @Nullable
     @Override
@@ -47,15 +38,19 @@ public class StopwatchFragment extends Fragment {
         binding = StopwatchFragment2Binding.inflate(inflater,container,false);
         View root = binding.getRoot();
 
-        mViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(GalleryViewModel.class);
         chronometer = binding.chronometer;
-        chronometer.setFormat("Luft Anhalten: %s huso");
+        //chronometer.setFormat("Luft Anhalten: %s");
         restartChronometer();
 
 
         binding.buttonStart.setOnClickListener(view -> startChronometer());
         binding.buttonPause.setOnClickListener(view -> pauseChronometer());
         binding.buttonReset.setOnClickListener(view -> resetChronometer());
+
+        mViewModel.getSavedTime().observe(this, savedTime -> binding.textViewSaveTime.setText(Long.toString(savedTime) + "s"));
+
+        binding.buttonSaveToDatabase.setOnClickListener(view -> saveTimeToDatabase());
 
         return root;
     }
@@ -106,6 +101,7 @@ public class StopwatchFragment extends Fragment {
 
 
     public void resetChronometer(){
+        mViewModel.setSavedTime((SystemClock.elapsedRealtime() - chronometer.getBase())/1000L);
         if(mViewModel.getState() == StopwatchState.running){
             mViewModel.setStartTime(SystemClock.elapsedRealtime());
             chronometer.setBase(mViewModel.getStartTime());
@@ -115,6 +111,13 @@ public class StopwatchFragment extends Fragment {
             mViewModel.setState(StopwatchState.stopped);
         }
 
+    }
+
+    public void saveTimeToDatabase(){
+        //kann kein nullpointerexception bei getSavedTime geben, da es mit dem 0L wert initialisiert ist
+        ControlPause controlPause = new ControlPause(new java.sql.Date(Calendar.getInstance().getTime().getTime()), mViewModel.getSavedTime().getValue());
+
+        mViewModel.insert(controlPause);
     }
 
 }
