@@ -9,20 +9,26 @@ import java.util.List;
 
 public class ControlPauseRepository {
     private ControlPauseDao controlPauseDao;
-    private LiveData<List<ControlPause>> alleControlPause;
+    private LiveData<List<ControlPause>> alleControlPauseByDate;
+    private LiveData<List<ControlPause>> alleControlPauseByLaenge;
 
     public ControlPauseRepository(Application application){
         UebungDatenbank datenbank = UebungDatenbank.getInstance(application);
         controlPauseDao = datenbank.controlPauseDao();
-        alleControlPause = controlPauseDao.getAllControlPause();
+        alleControlPauseByDate = controlPauseDao.getAllControlPauseByDate();
+        alleControlPauseByLaenge = controlPauseDao.getAllControlPauseByLaenge();
     }
 
     public void insertControlPause(ControlPause controlPause){
         new InsertControlPauseAsyncTask(controlPauseDao).execute(controlPause);
     }
 
-    public LiveData<List<ControlPause>> getAlleControlPause(){
-        return alleControlPause;
+    public LiveData<List<ControlPause>> getAlleControlPauseByDate(){
+        return alleControlPauseByDate;
+    }
+
+    public LiveData<List<ControlPause>> getAlleControlPauseByLaenge() {
+        return alleControlPauseByLaenge;
     }
 
     private static class InsertControlPauseAsyncTask extends AsyncTask<ControlPause, Void, Void>{

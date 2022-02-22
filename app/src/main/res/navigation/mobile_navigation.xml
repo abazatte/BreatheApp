@@ -72,7 +72,30 @@
         android:id="@+id/nav_gallery"
         android:name="com.example.datenbankefuerprojekt.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery">
+        <action
+            android:id="@+id/action_nav_gallery_start_gallery_to_nav_fragment"
+            app:destination="@id/nav_gallery_stopwatch"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery_stopwatch"
+        android:name="com.example.datenbankefuerprojekt.ui.gallery.StopwatchFragment"
+        android:label="StopWatch"
+        tools:layout="@layout/stopwatch_fragment2">
+        <action
+            android:id="@+id/action_nav_gallery_start_controlpause_fragment_to_nav_gallery"
+            app:destination="@id/nav_gallery"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"

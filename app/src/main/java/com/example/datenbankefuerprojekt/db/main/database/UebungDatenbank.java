@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
-@Database(entities = {Uebung.class, Fragment.class, ControlPause.class}, version = 6)
+@Database(entities = {Uebung.class, Fragment.class, ControlPause.class}, version = 7)
 public abstract class UebungDatenbank extends RoomDatabase {
     private static UebungDatenbank INSTANCE;
     public abstract UebungDao uebungDao();

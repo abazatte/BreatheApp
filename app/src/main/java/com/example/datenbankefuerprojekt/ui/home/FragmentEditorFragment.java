@@ -84,9 +84,7 @@ public class FragmentEditorFragment extends Fragment {
 
     /**
      * @author Abdurrahman Azattemür, Maximilian Jaesch
-     * <p></p>
-     * hier werden die UI Elemente von dem Binding mit den XML elementen verbunden
-     *
+     * <p>hier werden die UI Elemente von dem Binding mit den XML elementen verbunden</p>
      * */
     private void initUI(){
         editTextTitel = binding.editTextTitle;

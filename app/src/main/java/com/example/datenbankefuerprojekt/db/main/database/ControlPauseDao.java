@@ -13,6 +13,8 @@ public interface ControlPauseDao {
     void insert(ControlPause controlPause);
 
     @Query("SELECT * FROM control_pause_table ORDER BY laenge DESC")
-    LiveData<List<ControlPause>> getAllControlPause();
-    //hier vlt noch nach datum sortiert oder so?
+    LiveData<List<ControlPause>> getAllControlPauseByLaenge();
+
+    @Query("SELECT * FROM control_pause_table ORDER BY date DESC")
+    LiveData<List<ControlPause>> getAllControlPauseByDate();
 }
