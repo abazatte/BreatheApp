@@ -73,6 +73,8 @@ public class GalleryFragment extends Fragment {
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
+                //hier monat oder so´`?``
+                //und dann aus database most recent oder so
                 return DAYS[(int) value];
             }
         });
