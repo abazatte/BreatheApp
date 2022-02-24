@@ -63,18 +63,20 @@ public class GalleryFragment extends Fragment {
 
 
     /*https://stackoverflow.com/questions/1520887/how-to-pause-sleep-thread-or-process-in-android*/
-    private static class MyHandler extends Handler {}
-    private static class MyRunnable implements Runnable{
+    private static class MyHandler extends Handler {
+    }
+
+    private static class MyRunnable implements Runnable {
         private final WeakReference<GalleryFragment> galleryFragmentWeakReference;
 
-        public MyRunnable(GalleryFragment fragment){
+        public MyRunnable(GalleryFragment fragment) {
             galleryFragmentWeakReference = new WeakReference<>(fragment);
         }
 
         @Override
         public void run() {
             GalleryFragment fragment = galleryFragmentWeakReference.get();
-            if(fragment!= null){
+            if (fragment != null) {
                 //fragment.returnToUebungEditor();
                 fragment.startDiagrammCreation();
             }
@@ -89,11 +91,16 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        galleryViewModel.getAllControlPauseByDate().observe(this, allControlPause -> this.controlPauses = allControlPause);
+        galleryViewModel.getAllControlPauseByDate().observe(this, allControlPause -> {
+            if (allControlPause != null) {
+                this.controlPauses = allControlPause;
+                startDiagrammCreation();
+            }
+        });
 
         //galleryViewModel.testMonth();
 
-        myHandler.postDelayed(myRunnable,2000);
+        //myHandler.postDelayed(myRunnable,2000);
 
         binding.buttonControlpauseStart.setOnClickListener(view ->
                 Navigation.findNavController(root).navigate(R.id.action_nav_gallery_start_gallery_to_nav_fragment, null));
@@ -244,8 +251,8 @@ public class GalleryFragment extends Fragment {
         }
     }
 
-    private void startDiagrammCreation(){
-        controlPauses = controlPauseList.getValue();
+    private void startDiagrammCreation() {
+        //controlPauses = controlPauseList.getValue();
         chart = binding.barChart;
         BarData data = createChartData();
         configureChartAppearance();
