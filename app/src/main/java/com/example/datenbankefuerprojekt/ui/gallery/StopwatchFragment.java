@@ -84,6 +84,7 @@ public class StopwatchFragment extends Fragment {
             chronometer.setBase(mViewModel.getStartTime());
             chronometer.start();
             mViewModel.setState(StopwatchState.running);
+
         }
     }
 

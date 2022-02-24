@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.datenbankefuerprojekt.db.main.database.ControlPause;
 import com.example.datenbankefuerprojekt.db.main.database.ControlPauseRepository;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Random;
 
 public class GalleryViewModel extends AndroidViewModel {
 
@@ -80,6 +82,22 @@ public class GalleryViewModel extends AndroidViewModel {
 
     public LiveData<Long> getSavedTime(){
         return savedTime;
+    }
+
+    public void testMonth(){
+        final int MAX_Y_VALUE = 50;
+        final int MIN_Y_VALUE = 5;
+        float y;
+        for (int i = 0; i < 12; i++) {
+            y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
+            Date date = new Date(2022, i, 12);
+            ControlPause controlPause = new ControlPause(date, (long) y);
+            y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
+            Date date1 = new Date(2022, i, 25);
+            ControlPause controlPause1 = new ControlPause(date1, (long) y);
+            insert(controlPause);
+            insert(controlPause1);
+        }
     }
 
 }
