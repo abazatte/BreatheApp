@@ -102,11 +102,15 @@ public class StopwatchFragment extends Fragment {
 
 
     public void resetChronometer(){
-        mViewModel.setSavedTime((SystemClock.elapsedRealtime() - chronometer.getBase())/1000L);
+
         if(mViewModel.getState() == StopwatchState.running){
+            mViewModel.setSavedTime((SystemClock.elapsedRealtime() - chronometer.getBase())/1000L);
             mViewModel.setStartTime(SystemClock.elapsedRealtime());
             chronometer.setBase(mViewModel.getStartTime());
+
         } else if(mViewModel.getState() == StopwatchState.paused){
+            //mViewModel.setSavedTime((SystemClock.elapsedRealtime() - chronometer.getBase() - mViewModel.getPauseOffset())/1000L);
+            mViewModel.setSavedTime(mViewModel.getPauseOffset()/1000L);
             mViewModel.setStartTime(SystemClock.elapsedRealtime());
             chronometer.setBase(mViewModel.getStartTime());
             mViewModel.setState(StopwatchState.stopped);
