@@ -91,7 +91,7 @@ public class GalleryFragment extends Fragment {
 
 
         galleryViewModel.getAllControlPauseByDate().observe(this, allControlPause -> {
-            if (allControlPause != null) {
+            if (allControlPause != null && !allControlPause.isEmpty()) {
                 this.controlPauses = allControlPause;
                 populateMonthControlPauses();
                 fillMonthControlPauses();
@@ -145,9 +145,7 @@ public class GalleryFragment extends Fragment {
         for (int i = 0; i < MAX_X_VALUE; i++) {
             float x = i;
 
-            //die werte haben
-            //float y = getMonthControlPausesForBiggerList(i).get(0).getLaenge();
-            float y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);;
+            float y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             // MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             values.add(new BarEntry(x, y));
         }
