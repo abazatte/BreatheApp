@@ -90,12 +90,15 @@ public class HomeFragment extends Fragment {
             //Toast.makeText(getActivity(), bundle.toString(), Toast.LENGTH_LONG).show();
             Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, prepareUebungBundle(uebung));
         });
-        /*
+
         adapter.setOnItemClickListener(uebung -> {
-            Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_add_edit_uebung, prepareUebungBundle(uebung));
+            if(uebung.getAnimationSpinnerPosition() == 1)
+                Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_progress_bar_fragment, prepareUebungBundle(uebung));
+            if(uebung.getAnimationSpinnerPosition() == 2)
+                Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_animation_fragment, prepareUebungBundle(uebung));
             //hier nach animations fragment navigieren
             //if abfrage, wenn progressbar, dann progressbarFragment, sonst AnimationFragment
-        });*/
+        });
         return root;
     }
 

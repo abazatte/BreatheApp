@@ -17,7 +17,7 @@ public class Fragment {
 
     private int einAtmenZeit;
 
-    private int einLuftanhaltZeil;
+    private int einLuftanhaltZeit;
 
     private int ausAtmenZeit;
 
@@ -27,11 +27,11 @@ public class Fragment {
 
     private int prioritaetFragment;
 
-    public Fragment(String titelFragment, int uebungId, int einAtmenZeit, int einLuftanhaltZeil, int ausAtmenZeit, int ausLuftanhaltZeit, int anzahlWiederholungenFragment, int prioritaetFragment){
+    public Fragment(String titelFragment, int uebungId, int einAtmenZeit, int einLuftanhaltZeit, int ausAtmenZeit, int ausLuftanhaltZeit, int anzahlWiederholungenFragment, int prioritaetFragment){
         this.titelFragment = titelFragment;
         this.uebungId = uebungId;
         this.einAtmenZeit = einAtmenZeit;
-        this.einLuftanhaltZeil = einLuftanhaltZeil;
+        this.einLuftanhaltZeit = einLuftanhaltZeit;
         this.ausAtmenZeit = ausAtmenZeit;
         this.ausLuftanhaltZeit = ausLuftanhaltZeit;
         this.anzahlWiederholungenFragment = anzahlWiederholungenFragment;
@@ -58,8 +58,8 @@ public class Fragment {
         return einAtmenZeit;
     }
 
-    public int getEinLuftanhaltZeil() {
-        return einLuftanhaltZeil;
+    public int getEinLuftanhaltZeit() {
+        return einLuftanhaltZeit;
     }
 
     public int getAusAtmenZeit() {

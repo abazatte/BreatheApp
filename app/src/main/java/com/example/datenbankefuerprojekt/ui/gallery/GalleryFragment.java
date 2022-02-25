@@ -91,6 +91,7 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         galleryViewModel.getAllControlPauseByDate().observe(this, allControlPause -> {
             if (allControlPause != null) {
                 this.controlPauses = allControlPause;

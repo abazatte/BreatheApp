@@ -33,7 +33,7 @@ public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.Fragm
                     oldItem.getAusAtmenZeit() == newItem.getAusAtmenZeit() &&
                     oldItem.getAusLuftanhaltZeit() == newItem.getAusLuftanhaltZeit() &&
                     oldItem.getEinAtmenZeit() == newItem.getEinAtmenZeit() &&
-                    oldItem.getEinLuftanhaltZeil() == newItem.getEinLuftanhaltZeil();
+                    oldItem.getEinLuftanhaltZeit() == newItem.getEinLuftanhaltZeit();
         }
     };
 

@@ -261,7 +261,7 @@ public class UebungEditorFragment extends Fragment {
         bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitelFragment());
         bundle1.putInt(HomeFragment.EXTRA_PRIO, fragment.getPrioritaetFragment());
         bundle1.putInt(UebungEditorFragment.EXTRA_EIN, fragment.getEinAtmenZeit());
-        bundle1.putInt(UebungEditorFragment.EXTRA_LUFTEIN, fragment.getEinLuftanhaltZeil());
+        bundle1.putInt(UebungEditorFragment.EXTRA_LUFTEIN, fragment.getEinLuftanhaltZeit());
         bundle1.putInt(UebungEditorFragment.EXTRA_AUS, fragment.getAusAtmenZeit());
         bundle1.putInt(UebungEditorFragment.EXTRA_LUFTAUS, fragment.getAusLuftanhaltZeit());
         bundle1.putInt(UebungEditorFragment.EXTRA_FRAGMENT_COUNT, fragment.getAnzahlWiederholungenFragment());

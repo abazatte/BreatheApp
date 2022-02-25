@@ -32,6 +32,7 @@
     <string name="uebung_title">Titel</string>
     <string name="uebung_description">Beschreibung</string>
     <string name="button_edit">Edit</string>
+    <string name="animation_fragment_label">Uebung</string>
     <string-array name="animations_array">
         <item>Select Animation</item>
         <item>ProgressBar</item>
