@@ -27,6 +27,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -47,6 +48,7 @@ public class GalleryFragment extends Fragment {
     private LiveData<List<ControlPause>> controlPauseList;
     List<ControlPause> controlPauses;
     List<List<ControlPause>> monthControlPauses = new ArrayList<List<ControlPause>>();
+    List<List<ControlPause>> sortedMonthControlPauses = new ArrayList<List<ControlPause>>();
     private BarChart chart;
 
 
@@ -95,6 +97,7 @@ public class GalleryFragment extends Fragment {
                 this.controlPauses = allControlPause;
                 populateMonthControlPauses();
                 fillMonthControlPauses();
+                reorderMonthControlPauses();
                 startDiagrammCreation();
             }
         });
@@ -145,7 +148,8 @@ public class GalleryFragment extends Fragment {
         for (int i = 0; i < MAX_X_VALUE; i++) {
             float x = i;
 
-            float y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
+            float y = sortedMonthControlPauses.get(i).get(0).getLaenge();
+            //float y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             // MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             values.add(new BarEntry(x, y));
         }
@@ -162,9 +166,6 @@ public class GalleryFragment extends Fragment {
     }
 
     private void setMonthXValues() {
-
-
-
         int dateChange = getCurrentMonth();
         for (int i = 11; i >= 0; i--) {
             MONTH[i] = getMonthString(dateChange);
@@ -172,18 +173,6 @@ public class GalleryFragment extends Fragment {
             if (dateChange == -1) {
                 dateChange = 11;
             }
-        }
-        for (int k = 0; k < 12; k++) {
-
-            //getMonthControlPausesForBiggerList(k).sort(new Comparator<ControlPause>() {
-            //    @Override
-            //    public int compare(ControlPause controlPause, ControlPause t1) {
-            //        return Long.compare(controlPause.getLaenge(), t1.getLaenge());
-            //    }
-            //});
-        }
-        for (int j = 0; j < 12; j++) {
-            //monthControlPauses.add(getMonthControlPausesForBiggerList(j));
         }
     }
 
@@ -197,6 +186,7 @@ public class GalleryFragment extends Fragment {
     private void populateMonthControlPauses(){
         for(int i = 0; i < MAX_X_VALUE; i++){
             this.monthControlPauses.add(new ArrayList<>());
+            this.sortedMonthControlPauses.add(new ArrayList<>());
         }
     }
 
@@ -212,14 +202,16 @@ public class GalleryFragment extends Fragment {
         }
 
         for (List<ControlPause> l : monthControlPauses){
-            System.out.println(l.toString());
+            //System.out.println(l.toString());
             l.sort(new Comparator<ControlPause>() {
                 @Override
                 public int compare(ControlPause controlPause, ControlPause t1) {
                     return Long.compare(controlPause.getLaenge(), t1.getLaenge());
                 }
             });
-            System.out.println(l.toString());
+            //ist falsch rum sortiert, deswegen reverse
+            Collections.reverse(l);
+            //System.out.println(l.toString());
         }
 
 
@@ -227,6 +219,17 @@ public class GalleryFragment extends Fragment {
 
     private int getCurrentMonth(){
         return Calendar.getInstance().get(Calendar.MONTH);
+    }
+
+    private void reorderMonthControlPauses(){
+        int dateChange = getCurrentMonth();
+        for (int i = 11; i >= 0; i--) {
+            sortedMonthControlPauses.set(i, monthControlPauses.get(dateChange));
+            dateChange--;
+            if (dateChange == -1) {
+                dateChange = 11;
+            }
+        }
     }
 
     /*
