@@ -38,4 +38,13 @@ public class ControlPause {
     public long getLaenge() {
         return laenge;
     }
+
+    @Override
+    public String toString() {
+        return "ControlPause{" +
+                "controlPauseId=" + controlPauseId +
+                ", date=" + date +
+                ", laenge=" + laenge +
+                '}';
+    }
 }

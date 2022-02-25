@@ -29,11 +29,14 @@ import java.util.Calendar;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
     private FragmentGalleryBinding binding;
+
+    //private static final int ANZAHL_MONTHS = 12;
 
     private static final int MAX_X_VALUE = 12;
     private static final int MAX_Y_VALUE = 50;
@@ -45,18 +48,13 @@ public class GalleryFragment extends Fragment {
     List<ControlPause> controlPauses;
     List<List<ControlPause>> monthControlPauses = new ArrayList<List<ControlPause>>();
     private BarChart chart;
-    List<ControlPause> jan = new ArrayList<ControlPause>();
-    List<ControlPause> feb = new ArrayList<ControlPause>();
-    List<ControlPause> mar = new ArrayList<ControlPause>();
-    List<ControlPause> apr = new ArrayList<ControlPause>();
-    List<ControlPause> mai = new ArrayList<ControlPause>();
-    List<ControlPause> jun = new ArrayList<ControlPause>();
-    List<ControlPause> jul = new ArrayList<ControlPause>();
-    List<ControlPause> aug = new ArrayList<ControlPause>();
-    List<ControlPause> sep = new ArrayList<ControlPause>();
-    List<ControlPause> okt = new ArrayList<ControlPause>();
-    List<ControlPause> nov = new ArrayList<ControlPause>();
-    List<ControlPause> dez = new ArrayList<ControlPause>();
+
+
+    /* TODO: alles was nicht mit View objekten wie barchart zu tun hat, in viewmodel packen!!!
+
+    */
+
+
 
     private final MyHandler myHandler = new MyHandler();
     private MyRunnable myRunnable;
@@ -95,9 +93,13 @@ public class GalleryFragment extends Fragment {
         galleryViewModel.getAllControlPauseByDate().observe(this, allControlPause -> {
             if (allControlPause != null) {
                 this.controlPauses = allControlPause;
+                populateMonthControlPauses();
+                fillMonthControlPauses();
                 startDiagrammCreation();
             }
         });
+
+
 
         //galleryViewModel.testMonth();
 
@@ -114,6 +116,8 @@ public class GalleryFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 
     private void configureChartAppearance() {
         chart.getDescription().setEnabled(false);
@@ -141,7 +145,9 @@ public class GalleryFragment extends Fragment {
         for (int i = 0; i < MAX_X_VALUE; i++) {
             float x = i;
 
-            float y = getMonthControlPausesForBiggerList(i).get(0).getLaenge();
+            //die werte haben
+            //float y = getMonthControlPausesForBiggerList(i).get(0).getLaenge();
+            float y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);;
             // MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             values.add(new BarEntry(x, y));
         }
@@ -158,11 +164,10 @@ public class GalleryFragment extends Fragment {
     }
 
     private void setMonthXValues() {
-        java.util.Date currentDate = Calendar.getInstance().getTime();
 
-        int currentMonth = currentDate.getMonth();
 
-        int dateChange = currentMonth;
+
+        int dateChange = getCurrentMonth();
         for (int i = 11; i >= 0; i--) {
             MONTH[i] = getMonthString(dateChange);
             dateChange--;
@@ -171,25 +176,62 @@ public class GalleryFragment extends Fragment {
             }
         }
         for (int k = 0; k < 12; k++) {
-            getMonthControlPausesForBiggerList(k).sort(new Comparator<ControlPause>() {
-                @Override
-                public int compare(ControlPause controlPause, ControlPause t1) {
-                    return Long.compare(controlPause.getLaenge(), t1.getLaenge());
-                }
-            });
+
+            //getMonthControlPausesForBiggerList(k).sort(new Comparator<ControlPause>() {
+            //    @Override
+            //    public int compare(ControlPause controlPause, ControlPause t1) {
+            //        return Long.compare(controlPause.getLaenge(), t1.getLaenge());
+            //    }
+            //});
         }
         for (int j = 0; j < 12; j++) {
-            monthControlPauses.add(getMonthControlPausesForBiggerList(j));
+            //monthControlPauses.add(getMonthControlPausesForBiggerList(j));
         }
     }
 
     private void initMonthControlPauses() {
         for (int i = 0; i < controlPauses.size(); i++) {
             int month = controlPauses.get(i).getDate().getMonth();
-            getMonthControlPausesForBiggerList(month).add(controlPauses.get(i));
+            //getMonthControlPausesForBiggerList(month).add(controlPauses.get(i));
         }
     }
 
+    private void populateMonthControlPauses(){
+        for(int i = 0; i < MAX_X_VALUE; i++){
+            this.monthControlPauses.add(new ArrayList<>());
+        }
+    }
+
+    private void fillMonthControlPauses(){
+        int currentMonth = getCurrentMonth();
+        //aus der Liste aller control pause, den month gucken, und dann dahin
+        for (ControlPause c :controlPauses) {
+            int monthOfControlPause = c.getDate().getMonth();
+            monthControlPauses.get(monthOfControlPause).add(c);
+            //den höchsten wert von current month
+            //monthControlPauses.get(i).add();
+
+        }
+
+        for (List<ControlPause> l : monthControlPauses){
+            System.out.println(l.toString());
+            l.sort(new Comparator<ControlPause>() {
+                @Override
+                public int compare(ControlPause controlPause, ControlPause t1) {
+                    return Long.compare(controlPause.getLaenge(), t1.getLaenge());
+                }
+            });
+            System.out.println(l.toString());
+        }
+
+
+    }
+
+    private int getCurrentMonth(){
+        return Calendar.getInstance().get(Calendar.MONTH);
+    }
+
+    /*
     private List<ControlPause> getMonthControlPausesForBiggerList(int month) {
         switch (month) {
             case 0:
@@ -219,7 +261,7 @@ public class GalleryFragment extends Fragment {
             default:
                 return null;
         }
-    }
+    }*/
 
     private String getMonthString(int currentMonth) {
         switch (currentMonth) {
@@ -260,3 +302,19 @@ public class GalleryFragment extends Fragment {
         prepareChartData(data);
     }
 }
+
+/*
+* List<ControlPause> jan = new ArrayList<ControlPause>();
+    List<ControlPause> feb = new ArrayList<ControlPause>();
+    List<ControlPause> mar = new ArrayList<ControlPause>();
+    List<ControlPause> apr = new ArrayList<ControlPause>();
+    List<ControlPause> mai = new ArrayList<ControlPause>();
+    List<ControlPause> jun = new ArrayList<ControlPause>();
+    List<ControlPause> jul = new ArrayList<ControlPause>();
+    List<ControlPause> aug = new ArrayList<ControlPause>();
+    List<ControlPause> sep = new ArrayList<ControlPause>();
+    List<ControlPause> okt = new ArrayList<ControlPause>();
+    List<ControlPause> nov = new ArrayList<ControlPause>();
+    List<ControlPause> dez = new ArrayList<ControlPause>();
+*
+* */
