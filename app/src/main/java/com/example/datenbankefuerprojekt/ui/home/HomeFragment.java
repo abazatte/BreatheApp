@@ -92,6 +92,9 @@ public class HomeFragment extends Fragment {
         });
 
         adapter.setOnItemClickListener(uebung -> {
+            homeViewModel.getAllFragmentsOfUebung(uebung.getId()).observe(requireActivity(), alleFragmentsOfCurrentUebung ->
+                    homeViewModel.setAllFragmentsOfCurrentUebung(alleFragmentsOfCurrentUebung));
+
             if(uebung.getAnimationSpinnerPosition() == 1)
                 Navigation.findNavController(root).navigate(R.id.action_nav_home_to_nav_home_progress_bar_fragment, prepareUebungBundle(uebung));
             if(uebung.getAnimationSpinnerPosition() == 2)

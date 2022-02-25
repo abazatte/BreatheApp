@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.datenbankefuerprojekt.db.main.database.Fragment;
 import com.example.datenbankefuerprojekt.db.main.database.Uebung;
 
+import java.util.List;
+
 public class AnimationViewModel extends ViewModel {
 
     /* TODO: iwie durch uebung iterieren
@@ -24,6 +26,7 @@ public class AnimationViewModel extends ViewModel {
 
     private Uebung currentUebung;
 
+    private List<Fragment> fragmentsOfCurrentUebung;
     private Fragment currentFragment;
     //hier iwie methode - go to next Fragment
     //da auch arrayindexoutofbounds abfangen unsooooo
@@ -77,5 +80,13 @@ public class AnimationViewModel extends ViewModel {
 
     public void setPlaying(boolean playing) {
         this.playing = playing;
+    }
+
+    public List<Fragment> getFragmentsOfCurrentUebung() {
+        return fragmentsOfCurrentUebung;
+    }
+
+    public void setFragmentsOfCurrentUebung(List<Fragment> fragmentsOfCurrentUebung) {
+        this.fragmentsOfCurrentUebung = fragmentsOfCurrentUebung;
     }
 }

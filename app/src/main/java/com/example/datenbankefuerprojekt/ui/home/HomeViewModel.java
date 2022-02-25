@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.datenbankefuerprojekt.db.main.database.Fragment;
 import com.example.datenbankefuerprojekt.db.main.database.Uebung;
@@ -20,11 +21,13 @@ public class HomeViewModel extends AndroidViewModel {
     private UebungRepository repository;
     private LiveData<List<Uebung>> allUebung;
     //private LiveData<Uebung> returnUebung;
+    private MutableLiveData<List<Fragment>> allFragmentsOfCurrentUebung;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         this.repository = new UebungRepository(application);
         this.allUebung = repository.getAlleUebungen();
+        allFragmentsOfCurrentUebung = new MutableLiveData<>(null);
     }
 
     public void insert(Uebung uebung) {
@@ -73,6 +76,13 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
 
+    public LiveData<List<Fragment>> getAllFragmentsOfCurrentUebung() {
+        return allFragmentsOfCurrentUebung;
+    }
+
+    public void setAllFragmentsOfCurrentUebung(List<Fragment> allFragmentsOfCurrentUebung) {
+        this.allFragmentsOfCurrentUebung.postValue(allFragmentsOfCurrentUebung);
+    }
 }
 
 /*
