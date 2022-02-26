@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/menu/activity_main_drawer.xml" value="0.23645833333333333" />
-        <entry key="..\:/Users/aazat/Desktop/Neu/Hochschule/3.Semester/Programmierung3/test/DatenbankeFuerProjekt/app/src/main/res/menu/home.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable-v24/ic_vertical_progress_bar.xml" value="0.2651282051282051" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable-v24/vertical_progress_bar.xml" value="0.2651282051282051" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/green_border.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_breathe_icon_fix.xml" value="0.2651282051282051" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_breathe_lightbackground.xml" value="0.2651282051282051" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_menu_camera.xml" value="0.14375" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.14375" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/ic_save.xml" value="0.14375" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/side_nav_bar.xml" value="0.14375" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/drawable/splash_background.xml" value="0.264" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/activity_home.xml" value="0.253125" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/animation_fragment.xml" value="0.264" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/app_bar_home.xml" value="0.253125" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/content_home.xml" value="0.253125" />
@@ -16,8 +21,15 @@
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_add_edit_uebung.xml" value="0.11761083743842364" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_gallery.xml" value="0.253125" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_item.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/fragment_progress_bar.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/nav_header_home.xml" value="0.264" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/stopwatch_fragment2.xml" value="0.12916666666666668" />
         <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/layout/uebung_item.xml" value="0.536" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/menu/activity_main_drawer.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/menu/add_edit_uebung_menu.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/menu/fragment_menu.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/menu/home.xml" value="0.253125" />
+        <entry key="..\:/Users/maxim/Documents/Hs_zeug/sem3/prog3/projekt/datenbankForProjekt/DatenbankForProjekt/app/src/main/res/menu/home_menu.xml" value="0.253125" />
       </map>
     </option>
   </component>
