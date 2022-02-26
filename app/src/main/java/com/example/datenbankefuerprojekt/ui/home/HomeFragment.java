@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentHomeBinding;
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
-import com.example.datenbankefuerprojekt.db.main.database.UebungAdapter;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.UebungAdapter;
 
 public class HomeFragment extends Fragment {
     public static final String EXTRA_TITEL = "com.example.datenbankefuerprojekt.ui.home.TITEL";

@@ -1,9 +1,13 @@
-package com.example.datenbankefuerprojekt.db.main.database;
+package com.example.datenbankefuerprojekt.db.main.database.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.example.datenbankefuerprojekt.db.main.database.UebungDatenbank;
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPause;
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPauseDao;
 
 import java.util.List;
 

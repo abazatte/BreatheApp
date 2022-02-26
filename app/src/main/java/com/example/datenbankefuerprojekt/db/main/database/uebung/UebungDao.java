@@ -1,4 +1,4 @@
-package com.example.datenbankefuerprojekt.db.main.database;
+package com.example.datenbankefuerprojekt.db.main.database.uebung;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 
 import java.util.List;
 

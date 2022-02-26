@@ -9,6 +9,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPause;
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPauseDao;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.FragmentDao;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.UebungDao;
+
 import java.sql.Date;
 import java.util.Random;
 

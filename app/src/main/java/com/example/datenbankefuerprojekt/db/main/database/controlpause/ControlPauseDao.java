@@ -1,9 +1,11 @@
-package com.example.datenbankefuerprojekt.db.main.database;
+package com.example.datenbankefuerprojekt.db.main.database.controlpause;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPause;
 
 import java.util.List;
 

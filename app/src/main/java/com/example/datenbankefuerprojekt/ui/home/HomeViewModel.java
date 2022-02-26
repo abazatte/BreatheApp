@@ -1,17 +1,15 @@
 package com.example.datenbankefuerprojekt.ui.home;
 
 import android.app.Application;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.datenbankefuerprojekt.db.main.database.Fragment;
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
-import com.example.datenbankefuerprojekt.db.main.database.UebungRepository;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.repository.UebungRepository;
 
 import java.util.List;
 

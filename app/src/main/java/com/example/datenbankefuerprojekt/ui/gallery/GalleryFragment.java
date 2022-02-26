@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentGalleryBinding;
-import com.example.datenbankefuerprojekt.db.main.database.ControlPause;
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPause;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -30,7 +30,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 public class GalleryFragment extends Fragment {
 

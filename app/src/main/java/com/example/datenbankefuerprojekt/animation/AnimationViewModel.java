@@ -2,8 +2,8 @@ package com.example.datenbankefuerprojekt.animation;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.datenbankefuerprojekt.db.main.database.Fragment;
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 
 import java.util.List;
 

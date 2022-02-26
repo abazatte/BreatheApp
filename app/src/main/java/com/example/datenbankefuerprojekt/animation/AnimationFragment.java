@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +28,9 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.AnimationFragmentBinding;
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
-import com.example.datenbankefuerprojekt.ui.gallery.GalleryFragment;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 import com.example.datenbankefuerprojekt.ui.home.HomeViewModel;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class AnimationFragment extends Fragment {
@@ -88,15 +85,15 @@ public class AnimationFragment extends Fragment {
         mViewModel.setCurrentUebung(receivedUebung);
 
         //hier noch iwie vor warten
-        homeViewModel.getAllFragmentsOfCurrentUebung().observe(this, new Observer<List<com.example.datenbankefuerprojekt.db.main.database.Fragment>>() {
+        homeViewModel.getAllFragmentsOfCurrentUebung().observe(this, new Observer<List<com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment>>() {
             @Override
-            public void onChanged(List<com.example.datenbankefuerprojekt.db.main.database.Fragment> fragments) {
+            public void onChanged(List<com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment> fragments) {
                 if(fragments != null){
                     if(fragments.isEmpty()){
                         Toast.makeText(getContext(), "Fragmente leer!!!!", Toast.LENGTH_SHORT).show();
                     }else{
                         mViewModel.setFragmentsOfCurrentUebung(fragments);
-                        com.example.datenbankefuerprojekt.db.main.database.Fragment test = mViewModel.getFragmentsOfCurrentUebung().get(0);
+                        com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment test = mViewModel.getFragmentsOfCurrentUebung().get(0);
                         if(test.getUebungId() == mViewModel.getCurrentUebung().getId()){
                             Toast.makeText(getContext(), "Es geht lmaooooooo", Toast.LENGTH_SHORT).show();
                         }

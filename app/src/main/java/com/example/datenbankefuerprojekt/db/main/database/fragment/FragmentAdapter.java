@@ -1,4 +1,4 @@
-package com.example.datenbankefuerprojekt.db.main.database;
+package com.example.datenbankefuerprojekt.db.main.database.fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;

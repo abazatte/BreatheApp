@@ -1,6 +1,5 @@
 package com.example.datenbankefuerprojekt.ui.gallery;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Chronometer;
 
 import com.example.datenbankefuerprojekt.databinding.StopwatchFragment2Binding;
-import com.example.datenbankefuerprojekt.db.main.database.ControlPause;
+import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPause;
 
 import java.util.Calendar;
 

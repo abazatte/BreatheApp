@@ -26,8 +26,8 @@ import android.widget.Toast;
 
 import com.example.datenbankefuerprojekt.R;
 import com.example.datenbankefuerprojekt.databinding.FragmentAddEditUebungBinding;
-import com.example.datenbankefuerprojekt.db.main.database.FragmentAdapter;
-import com.example.datenbankefuerprojekt.db.main.database.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.FragmentAdapter;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -255,7 +255,7 @@ public class UebungEditorFragment extends Fragment {
      * <p></p>
      * <p>Hilfsmethode die ein Bundle erstellt um das AddEditFragmentFragment zu initialisieren</p>
      * */
-    private Bundle createBundleForUebungsFragment(com.example.datenbankefuerprojekt.db.main.database.Fragment fragment){
+    private Bundle createBundleForUebungsFragment(com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment fragment){
         Bundle bundle1 = new Bundle();
         bundle1.putInt(HomeFragment.EXTRA_ID, fragment.getFragmentId());
         bundle1.putString(HomeFragment.EXTRA_TITEL, fragment.getTitelFragment());

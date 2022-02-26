@@ -1,9 +1,15 @@
-package com.example.datenbankefuerprojekt.db.main.database;
+package com.example.datenbankefuerprojekt.db.main.database.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+
+import com.example.datenbankefuerprojekt.db.main.database.UebungDatenbank;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment;
+import com.example.datenbankefuerprojekt.db.main.database.fragment.FragmentDao;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
+import com.example.datenbankefuerprojekt.db.main.database.uebung.UebungDao;
 
 import java.util.List;
 

@@ -115,7 +115,7 @@ public class FragmentEditorFragment extends Fragment {
 
 
         //in die datenbank einfügen
-        com.example.datenbankefuerprojekt.db.main.database.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
+        com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
         homeViewModel.insertFragment(fragment);
 
         //hier iwie die übung aus datenbank holen und dann mit bundle
@@ -142,7 +142,7 @@ public class FragmentEditorFragment extends Fragment {
 
 
 
-        com.example.datenbankefuerprojekt.db.main.database.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
+        com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment fragment = new com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment(titel,uebungId,einatmen,luftein,ausatmen,luftaus,count, prio);
         fragment.setFragmentId(id);
         homeViewModel.updateFragment(fragment);
 
