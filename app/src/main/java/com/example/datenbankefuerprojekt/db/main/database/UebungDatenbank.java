@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.util.Random;
 
 
-@Database(entities = {Uebung.class, Fragment.class, ControlPause.class}, version = 11)
+@Database(entities = {Uebung.class, Fragment.class, ControlPause.class}, version = 12)
 public abstract class UebungDatenbank extends RoomDatabase {
     private static UebungDatenbank INSTANCE;
     public abstract UebungDao uebungDao();

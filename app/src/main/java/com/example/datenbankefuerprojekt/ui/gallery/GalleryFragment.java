@@ -103,9 +103,7 @@ public class GalleryFragment extends Fragment {
         });
 
 
-
         //galleryViewModel.testMonth();
-
         //myHandler.postDelayed(myRunnable,2000);
 
         binding.buttonControlpauseStart.setOnClickListener(view ->
@@ -147,8 +145,10 @@ public class GalleryFragment extends Fragment {
         ArrayList<BarEntry> values = new ArrayList<>();
         for (int i = 0; i < MAX_X_VALUE; i++) {
             float x = i;
-
-            float y = sortedMonthControlPauses.get(i).get(0).getLaenge();
+            float y = 0;
+            if(!(sortedMonthControlPauses.get(i).size() == 0)){
+                y = sortedMonthControlPauses.get(i).get(0).getLaenge();
+            }
             //float y = MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             // MIN_Y_VALUE + new Random().nextFloat() * (MAX_Y_VALUE - MIN_Y_VALUE);
             values.add(new BarEntry(x, y));
