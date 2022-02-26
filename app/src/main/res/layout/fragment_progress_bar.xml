@@ -25,6 +25,7 @@
         android:text="HOLD!"
         android:visibility="invisible"
         tools:visibility="visible"
+        android:textSize="32sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

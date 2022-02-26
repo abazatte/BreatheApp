@@ -11,16 +11,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="titel!!"
+        android:textSize="30sp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_view_fragment_title"/>
+
+    <TextView
+        android:id="@+id/text_view_fragment_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="fragment titel!!"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_animation_title"
         app:layout_constraintBottom_toTopOf="@id/text_view_timer"/>
 
     <TextView
         android:id="@+id/text_view_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"
+        android:text="@string/timer_default"
+        android:textSize="50sp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_animation_title"
@@ -40,31 +56,27 @@
         />
 
     <Button
-        android:id="@+id/start_animation_button"
+        android:id="@+id/button_start_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start"
+        android:text="@string/start"
         app:layout_constraintTop_toBottomOf="@+id/lottie_polygon"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/stop_animation_button"/>
-
-    <Button
-        android:id="@+id/stop_animation_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="stop"
-        app:layout_constraintTop_toBottomOf="@+id/lottie_polygon"
-        app:layout_constraintLeft_toRightOf="@id/start_animation_button"
         app:layout_constraintRight_toLeftOf="@id/reset_button"/>
+
+
 
     <Button
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="reset"
+        android:text="@string/reset"
         app:layout_constraintTop_toBottomOf="@id/lottie_polygon"
-        app:layout_constraintLeft_toRightOf="@id/stop_animation_button"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toRightOf="@id/button_start_pause"
+        app:layout_constraintRight_toRightOf="parent"
+        android:enabled="false"/>
+
+
 
 
 
