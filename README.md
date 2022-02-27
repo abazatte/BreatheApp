@@ -107,4 +107,4 @@ Man hat 15 Sekunden die Luft angehalten
 
 ![Untitled](Projekt%20Re%20f45a1/Untitled%2016.png)
 
-Man jat reset gedrückt und man erhält die Moglichkeit zu speichern
+Man hat reset gedrückt und man erhält die Moglichkeit zu speichern
