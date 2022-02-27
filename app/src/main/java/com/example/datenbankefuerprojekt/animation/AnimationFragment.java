@@ -271,7 +271,7 @@ public class AnimationFragment extends Fragment {
         textViewFragmentTitle.setText(mViewModel.getCurrentFragment().getTitelFragment());
 
         if(mViewModel.getState() == BreatheAnimationState.breathe_in){
-                lottieAnimationView.setAnimation(R.raw.breathe_in);
+            lottieAnimationView.setAnimation(R.raw.breathe_in);
         }
         if(mViewModel.getState() == BreatheAnimationState.hold_up) {
             lottieAnimationView.setAnimation(R.raw.hold_up);

@@ -5,7 +5,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
         tools:context=".ui.home.UebungEditorFragment"
@@ -19,12 +19,15 @@
             android:inputType="text"
             android:textAlignment="center"
             android:layout_marginTop="16dp"
+            android:selectAllOnFocus="true"
+            android:gravity="center"
+
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Priority:"
+            android:text="@string/priority"
             android:layout_marginTop="8dp"
             android:textAppearance="@android:style/TextAppearance.Medium"/>
 
@@ -33,6 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:hint="         "
+            android:gravity="center"
+
             />
 
         <TextView
@@ -47,6 +54,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:hint="         "
+            android:gravity="center"
             />
 
         <TextView
@@ -61,6 +71,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:hint="         "
+            android:gravity="center"
+
             />
 
         <TextView
@@ -76,6 +90,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:hint="         "
+            android:gravity="center"
+
             />
 
         <TextView
@@ -89,7 +107,11 @@
             android:id="@+id/luftAusAnhaltZeit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:hint="         "
+            android:gravity="center"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -102,7 +124,11 @@
             android:id="@+id/counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:hint="         "
+            android:gravity="center"
+            />
 
     </LinearLayout>
 </ScrollView>

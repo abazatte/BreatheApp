@@ -11,7 +11,7 @@
         android:id="@+id/text_view_animation_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="titel!!"
+        android:text="@string/animation_titel_dummy"
         android:textSize="30sp"
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/text_view_fragment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fragment titel!!"
+        android:text="@string/fragment_titel_dummy"
         android:textSize="25sp"
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,12 +47,10 @@
         android:id="@+id/lottie_polygon"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_start_pause"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_timer"
-
-
         app:lottie_rawRes="@raw/breathe_in"
         />
 
@@ -63,7 +61,8 @@
         android:text="@string/start"
         app:layout_constraintTop_toBottomOf="@+id/lottie_polygon"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/reset_button"/>
+        app:layout_constraintRight_toLeftOf="@id/reset_button"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
@@ -75,6 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/lottie_polygon"
         app:layout_constraintLeft_toRightOf="@id/button_start_pause"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:enabled="false"/>
 
 

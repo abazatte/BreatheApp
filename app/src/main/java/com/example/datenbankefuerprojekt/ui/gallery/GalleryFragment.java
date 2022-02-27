@@ -41,7 +41,7 @@ public class GalleryFragment extends Fragment {
     private static final int MAX_X_VALUE = 12;
     private static final int MAX_Y_VALUE = 50;
     private static final int MIN_Y_VALUE = 5;
-    private static final String SET_LABEL = "App Downloads";
+    private static final String SET_LABEL = "Record Seconds";
     private static String[] MONTH = new String[MAX_X_VALUE];
 
     private LiveData<List<ControlPause>> controlPauseList;

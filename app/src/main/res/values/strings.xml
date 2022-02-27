@@ -42,4 +42,14 @@
     <string name="start">start</string>
     <string name="pause">pause</string>
     <string name="reset">reset</string>
+    <string name="priority_edit_text">Priority</string>
+    <string name="fragment_titel_dummy">fragment titel!!</string>
+    <string name="animation_titel_dummy">titel!!</string>
+    <string name="hold_prompt">HOLD!</string>
+    <string name="new_fragment_button_label">new\nfragment</string>
+    <string name="edit_text_seconds_hint">sec</string>
+    <string name="colon_symbol">:</string>
+    <string name="edit_text_minutes_hint">min</string>
+    <string name="empty_hint">"                "</string>
+    <string name="priority">Priority:</string>
 </resources>
