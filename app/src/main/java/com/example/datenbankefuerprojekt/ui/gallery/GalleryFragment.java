@@ -56,12 +56,12 @@ public class GalleryFragment extends Fragment {
     */
 
 
-
+/*
     private final MyHandler myHandler = new MyHandler();
     private MyRunnable myRunnable;
 
 
-    /*https://stackoverflow.com/questions/1520887/how-to-pause-sleep-thread-or-process-in-android*/
+    //https://stackoverflow.com/questions/1520887/how-to-pause-sleep-thread-or-process-in-android
     private static class MyHandler extends Handler {
     }
 
@@ -80,7 +80,7 @@ public class GalleryFragment extends Fragment {
                 fragment.startDiagrammCreation();
             }
         }
-    }
+    }*/
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
