@@ -57,7 +57,8 @@ public class HomeFragment extends Fragment {
 
 
 
-        homeViewModel.getAllUebung().observe(this, uebungs -> adapter.submitList(uebungs));
+        homeViewModel.getAllUebung().observe(this, uebungs ->
+                adapter.submitList(uebungs));
 
         /*
          * dieses swipen
