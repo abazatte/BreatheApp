@@ -5,7 +5,8 @@
     android:id="@+id/stopwatch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gallery.StopwatchFragment">
+    tools:context=".ui.gallery.StopwatchFragment"
+    android:background="@drawable/ic_breathe_lightbackground">
 
     <Chronometer
         android:id="@+id/chronometer"

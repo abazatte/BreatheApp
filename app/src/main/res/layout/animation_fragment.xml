@@ -5,7 +5,8 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".animation.AnimationFragment">
+    tools:context=".animation.AnimationFragment"
+    android:background="@drawable/ic_breathe_lightbackground">
     <TextView
         android:id="@+id/text_view_animation_title"
         android:layout_width="wrap_content"

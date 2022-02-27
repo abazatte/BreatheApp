@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".ui.home.UebungEditorFragment">
+        tools:context=".ui.home.UebungEditorFragment"
+        android:background="@drawable/ic_breathe_lightbackground">
 
         <EditText
             android:id="@+id/edit_text_title"

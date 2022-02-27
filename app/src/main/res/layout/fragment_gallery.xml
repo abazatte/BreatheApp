@@ -20,5 +20,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="32dp"
+        android:backgroundTint="@color/yelloworange"
         />
 </RelativeLayout>
