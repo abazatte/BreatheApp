@@ -333,6 +333,7 @@ public class UebungEditorFragment extends Fragment {
                 builder.setNegativeButton(R.string.delete_fragment_dialog_negative_button_label, ((dialogInterface, i) -> {
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }));
+                builder.setOnCancelListener(dialogInterface -> adapter.notifyItemChanged(viewHolder.getAdapterPosition()));
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

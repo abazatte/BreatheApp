@@ -1,6 +1,7 @@
 package com.example.datenbankefuerprojekt.ui.home;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -80,6 +81,7 @@ public class HomeFragment extends Fragment {
                 builder.setNegativeButton(R.string.delete_uebung_negative_button_label, ((dialogInterface, i) -> {
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }));
+                builder.setOnCancelListener(dialogInterface -> adapter.notifyItemChanged(viewHolder.getAdapterPosition()));
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

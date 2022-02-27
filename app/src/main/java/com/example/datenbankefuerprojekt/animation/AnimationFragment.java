@@ -56,7 +56,7 @@ public class AnimationFragment extends Fragment {
     private boolean alreadyInitialised;
     //Textview timer??
 
-    /*TODO:
+    /*DONE:
      * animation um viewmodel erweitern
      * -> egal nur um sachen zu speichern, keine lifecycle sachen das das weiterläuft!
      * keep it simple, i need to finish rather than perfect!
@@ -113,7 +113,7 @@ public class AnimationFragment extends Fragment {
                         com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment test = mViewModel.getFragmentsOfCurrentUebung().get(0);
                         //wenn diese if bedingung True ist, dann ist alles gucci gang
                         if(test.getUebungId() == mViewModel.getCurrentUebung().getId()){
-                            Log.i(TAG, "onChanged: dolepe?");
+                            Log.i(TAG, "onChanged: ¿dolepe?");
 
                             Toast.makeText(getContext(), "Bereit", Toast.LENGTH_SHORT).show();
                             /*Fehler: wenn das Fragment geschlossen und wieder aufgerufen wird, dann wird diese onchanged methode doppelt aufrufen
@@ -160,70 +160,6 @@ public class AnimationFragment extends Fragment {
     }
 
 
-/*
-    private void changeAnimation(){
-        //check if it is a certain state
-        //move to the next state in the chain
-
-        lottieAnimationView.setMinFrame(0);
-        lottieAnimationView.setProgress(0);
-
-        if(mViewModel.getState() == BreatheAnimationState.breathe_in){
-            lottieAnimationView.setAnimation(R.raw.hold_up);
-            mViewModel.setState(BreatheAnimationState.hold_up);
-
-            //calcAndSetSpeed(TIME_HOLD_UP);
-
-        } else if(mViewModel.getState() == BreatheAnimationState.hold_up){
-            lottieAnimationView.setAnimation(R.raw.breathe_out);
-            mViewModel.setState(BreatheAnimationState.breathe_out);
-
-            //calcAndSetSpeed(TIME_BREATHE_OUT);
-
-        } else if(mViewModel.getState() == BreatheAnimationState.breathe_out) {
-            lottieAnimationView.setAnimation(R.raw.hold_down);
-            mViewModel.setState(BreatheAnimationState.hold_down);
-
-            //calcAndSetSpeed(TIME_HOLD_DOWN);
-
-        } else if (mViewModel.getState() == BreatheAnimationState.hold_down){
-            lottieAnimationView.setAnimation(R.raw.breathe_in);
-            mViewModel.setState(BreatheAnimationState.breathe_in);
-
-            //calcAndSetSpeed(TIME_BREATHE_IN);
-            //when it has finished one turn, then increase the repetitions
-            mViewModel.increaseCurrentFragmentRepetitions();
-        }
-
-    }*/
-
-    /*
-    private void initAnimationView(){
-        lottieAnimationView.setSpeed(mViewModel.getSpeed());
-        lottieAnimationView.setMinFrame(mViewModel.getSavedFrame());
-        if(mViewModel.getState() == BreatheAnimationState.breathe_in){
-            lottieAnimationView.setAnimation(R.raw.breathe_in);
-            //hier muss ich wohl iwie ne mehtode haben bei changeanimation das ich im viewmodel was hochzähle oder so???????
-            //und dann ne abfrage??
-            //und eine methode, wo der timer das aufruft wenns fertig ist, zb iwie end methode oder so
-            //calcAndSetSpeed(TIME_BREATHE_IN);
-
-        } else if(mViewModel.getState() == BreatheAnimationState.hold_up){
-            lottieAnimationView.setAnimation(R.raw.hold_up)
-            //calcAndSetSpeed(TIME_HOLD_UP);
-
-        } else if(mViewModel.getState() == BreatheAnimationState.breathe_out) {
-            lottieAnimationView.setAnimation(R.raw.breathe_out);
-            //calcAndSetSpeed(TIME_BREATHE_OUT);
-
-        } else if (mViewModel.getState() == BreatheAnimationState.hold_down){
-            lottieAnimationView.setAnimation(R.raw.hold_down);
-            //calcAndSetSpeed(TIME_HOLD_DOWN);
-        }
-
-    }*/
-
-
 
 
 
@@ -231,27 +167,7 @@ public class AnimationFragment extends Fragment {
 
 
 
-    /* wird eh bei init Uebung aufgerufen!
-    private void prepareLottieParameters(){
-        mViewModel.calcAndSetSpeed();
-    }*/
-
-
-    //diese observer müssen raus!!!!!!!!!!!!!!
     private void lottieInitObservers(){
-
-
-        /*
-        //hier könnte es ein problem geben, was wenn er playAnimation macht bevor er eine animation hat?
-        mViewModel.isUebungRunning().observe(getViewLifecycleOwner(), running -> {
-            if(running){
-                lottieAnimationView.setMinFrame(mViewModel.getSavedFrame());
-                lottieAnimationView.playAnimation();
-            } else {
-                lottieAnimationView.pauseAnimation();
-                mViewModel.setSavedFrame(lottieAnimationView.getFrame());
-            }
-        });*/
         mViewModel.isUebungFinished().observe(getViewLifecycleOwner(), finished -> {
             lottieAnimationView.pauseAnimation();
         });
@@ -368,31 +284,3 @@ public class AnimationFragment extends Fragment {
         }
     }
 }
-
-/*
-*  private final MyHandler myHandler = new MyHandler();
-    private MyRunnable myRunnable;
-
-
-    //https://stackoverflow.com/questions/1520887/how-to-pause-sleep-thread-or-process-in-android
-private static class MyHandler extends Handler {
-}
-
-private static class MyRunnable implements Runnable {
-    private final WeakReference<AnimationFragment> animationFragmentWeakReference;
-
-    public MyRunnable(AnimationFragment fragment) {
-        animationFragmentWeakReference = new WeakReference<>(fragment);
-    }
-
-    @Override
-    public void run() {
-        GalleryFragment fragment = galleryFragmentWeakReference.get();
-        if (fragment != null) {
-            //fragment.returnToUebungEditor();
-            fragment.startDiagrammCreation();
-        }
-    }
-}
-*
-* */
