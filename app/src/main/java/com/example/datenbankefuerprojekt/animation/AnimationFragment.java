@@ -37,6 +37,10 @@ import com.example.datenbankefuerprojekt.ui.home.HomeViewModel;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author Maximilian Jaesch, Abdurrahman Azattemür
+ *
+ * diese Klasse setzt die Animation und Uebungsdurchführung um*/
 public class AnimationFragment extends Fragment {
     public static final String TAG = "AnimationFragment";
 
@@ -74,6 +78,12 @@ public class AnimationFragment extends Fragment {
 
 
 
+    /**
+     * @author Maximilian Jaesch, Abdurrahman Azattemür(debugging)
+     *
+     * diese Methode initialisiert die Viewmodel, holt die Übung aus dem Bundle
+     * und extrahiert alle informationen aus dem fragment, wenn dieses von der SQL query eingetroffen ist
+     * */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -149,6 +159,12 @@ public class AnimationFragment extends Fragment {
         //mViewModel.setPlaying(lottieAnimationView.isAnimating());
     }*/
 
+    /**
+     * @author Maximilian Jaesch
+     *
+     * diese hilfsmethode weist die referenzen aus dem Databinding den Objektvariablen zu
+     * */
+
     private void initMemberVariables(){
         lottieAnimationView = binding.lottiePolygon;
         buttonStartPause = binding.buttonStartPause;
@@ -167,15 +183,27 @@ public class AnimationFragment extends Fragment {
 
 
 
+    /**
+     * @author Maximilian Jaesch
+     *
+     * diese hilfsmethode setted einen Observer, der dafür sorgt, das die animation stoppt wenn die zeit abgelaufen ist*/
     private void lottieInitObservers(){
         mViewModel.isUebungFinished().observe(getViewLifecycleOwner(), finished -> {
             lottieAnimationView.pauseAnimation();
         });
-
-
     }
 
+
     /**
+     * @author Maximilian Jaesch
+     * <p>
+     *
+     * </p>
+     * diese Methode setzt Observer auf MutableLiveData von mViewModel, damit die Buttons richtig deaktiviert und aktiviert werden
+     * Wenn die uebung vorbei ist soll z. B. der Start Button deaktiviert sein
+     * <p>
+     *
+     * </p>
      * greift auf TimeLeftInMillis und UebungDurationZu, also erst aufrufen wenn diese initialisiert wurden
      * */
     private void timerInitObservers(){
@@ -213,6 +241,13 @@ public class AnimationFragment extends Fragment {
         });
     }
 
+    /**
+     * @author Maximilian Jaesch
+     * <p></p>
+     * OnClickListener für steuerung über Buttons werden gesetzt.
+     * Es wird ein OnAnimationEndListener gesetzt, damit die nächste Animation geladen werden kann.
+     *
+     * */
     private void setListeners(){
 
         buttonStartPause.setOnClickListener(new View.OnClickListener() {
@@ -262,6 +297,12 @@ public class AnimationFragment extends Fragment {
         });
     }
 
+
+    /**
+     * @author Maximilian Jaesch
+     * <p></p>
+     * Es werden die werte des lottieAnimationView vorbereitet
+     * */
     private void setupAnimation(){
         Log.i(TAG, "setupAnimation: speed:" + mViewModel.getSpeed());
         Log.i(TAG, "setupAnimation: Progress" + lottieAnimationView.getProgress());

@@ -39,6 +39,14 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Locale;
 
+
+/**
+ * @author Maximilian Jaesch, Abdurrahman Azattemür
+ *
+ * diese Klasse setzt die Animation mit Progressbarund Uebungsdurchführung um
+ * <p></p>
+ * kopie und Ausbau von {@link AnimationFragment} */
+
 public class ProgressBarFragment extends Fragment {
     public static final String TAG = "ProgressBarFragment";
 
@@ -61,6 +69,12 @@ public class ProgressBarFragment extends Fragment {
 
 
 
+
+    /**
+     * @author Maximilian Jaesch
+     *
+     * standard onCreateView Methode, die auch die restlichen Methoden aufruft.
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,6 +91,12 @@ public class ProgressBarFragment extends Fragment {
         return binding.getRoot();
     }
 
+
+    /**
+     * @author Maximilian Jaesch
+     *
+     * diese hilfsmethode weist die referenzen aus dem Databinding den Objektvariablen zu
+     * */
     private void initMemberVariables(){
         progressBar = binding.pbar;
         buttonStartPause = binding.buttonStartPauseProg;

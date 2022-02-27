@@ -12,6 +12,17 @@ import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 
 import java.util.List;
 
+/**
+ * @author Maximilian Jaesch, Abdurrahman Azattemür
+ *
+ * dieses Viewmodel hält die Übung und die Liste an Fragmentetn und
+ * erlaubt eine gute Steuerung des AnimationFragment über seine MutableLiveData
+ *
+ * <p></p>
+ * <a>Quelle: https://www.youtube.com/watch?v=MDuGwI6P-X8</a>
+ * der Timer wurde mithilfe von diesem Tutorial erstellt, aber in eigenarbeit auf Viewmodel und MutableLiveData ausgebaut
+ *
+ * */
 public class AnimationViewModel extends ViewModel {
     public static final String TAG = "AnimationViewModel";
 
@@ -56,6 +67,8 @@ public class AnimationViewModel extends ViewModel {
     private MutableLiveData<Long> timeLeftInMillis;
 
     /**
+     * @author Maximilian Jaesch
+     *
      * Dieser Konstruktor sollte nur aufgerufen werden wenn das Fragment neu geöffnet wird, da das Fragment der Owner des Viewmodels ist
      * Dieser Aufruf passiert nur wenn der User eine Übung von vorne beginnen möchte, also werden alle werte auf 0 gesetzt
      *
@@ -80,7 +93,7 @@ public class AnimationViewModel extends ViewModel {
 
     }
 
-    /**
+    /**@author Maximilian Jaesch
      * <p>wird aufgerufen wenn currentUebung und fragmentsOfCurrentUebung schon initialisiert sind
      * </p>
      *
@@ -105,7 +118,8 @@ public class AnimationViewModel extends ViewModel {
 
 
     /**
-     * wird vom Reset button aufgerufen, alles in anfangszustand
+     * @author Maximilian Jaesch
+     * wird vom Reset button aufgerufen, alles wird in den Anfangszustand gesetzt
      * */
     public void resetUebung(){
         timeLeftInMillis.setValue(uebungDurationInSeconds * 1000L);
@@ -122,14 +136,10 @@ public class AnimationViewModel extends ViewModel {
 
 
     /**
-     * erst aufrufen wenn Uebung und Fragmente festgelegt sind
-     * vlt eine initMethode?
+     * @author Maximilian Jaesch
+     *
+     * startet den Timer, der die Uebung anfängt und beendet
      * */
-    /*
-    private void startUebung(){
-        currentFragmentListPosition = 0;
-        currentFragment = fragmentsOfCurrentUebung.get(currentFragmentListPosition);
-    }*/
 
     //diese Methode in startUebung aufrufen
     public void startTimer(){
@@ -163,6 +173,14 @@ public class AnimationViewModel extends ViewModel {
         uebungFinished.setValue(false);
     }
 
+
+    /**
+     * @author Maximilian Jaesch
+     * <p>
+     *    wechselt zum nächsten Fragment der Übung, wenn es durch ist, dann fängt es von vorne an
+     *    wird von increaseCurrentFragmentRepetitions alleinig aufgerufen
+     * </p>
+     * */
     private void changeToNextFragment(){
 
         if(currentFragmentListPosition+1 < fragmentsOfCurrentUebung.size()){
@@ -178,6 +196,13 @@ public class AnimationViewModel extends ViewModel {
 
     }
 
+    /**
+     * @author Maximilian Jaesch
+     * <p>
+     *    incrementiert die Durchläufe des Fragments
+     *    wird von changeToNextBreatheAnimationState alleinig aufgerufen
+     * </p>
+     * */
     public void increaseCurrentFragmentRepetitions(){
         if(currentFragmentRepetitions+1 < currentFragment.getAnzahlWiederholungenFragment()){
             currentFragmentRepetitions++;

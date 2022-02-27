@@ -13,6 +13,18 @@ import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 
 import java.util.List;
 
+/**
+ * @author Maximilian Jaesch, Abdurrahman Azattemür
+ *
+ * kopie und erweiterung von AnimationViewModel
+ * dort sind die Javadocs ausführlicher.
+ *
+ * <p></p>
+ * <a>Quelle: https://www.youtube.com/watch?v=MDuGwI6P-X8</a>
+ * der Timer wurde mithilfe von diesem Tutorial erstellt, aber in eigenarbeit auf Viewmodel und MutableLiveData ausgebaut
+ *
+ * */
+
 public class ProgressBarViewModel extends ViewModel {
     public static final String TAG = "ProgressBarViewModel";
 
