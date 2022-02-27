@@ -1,5 +1,7 @@
 # Breathe App
 
+Link zum [GitHub](https://github.com/abazatte/BreatheApp) für eine bessere Ansicht.
+
 Das Projekt wurde mit **Android Studio** mit der Programmiersprache **Java** programmiert.
 
 ![grafik (6).png](Projekt%20Re%20f45a1/grafik_(6).png)
