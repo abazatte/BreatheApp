@@ -13,7 +13,9 @@ import com.example.datenbankefuerprojekt.db.main.database.repository.ControlPaus
 import java.sql.Date;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * @author Maximilian Jaesch, Abdurrahman Azattemür
+ */
 public class GalleryViewModel extends AndroidViewModel {
 
     private Long pauseOffset;

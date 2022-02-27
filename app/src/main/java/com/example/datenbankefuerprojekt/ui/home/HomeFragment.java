@@ -60,9 +60,9 @@ public class HomeFragment extends Fragment {
         homeViewModel.getAllUebung().observe(this, uebungs ->
                 adapter.submitList(uebungs));
 
-        /*
+        /**
          * dieses swipen
-         * */
+         */
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
             @Override
@@ -107,7 +107,9 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
-
+    /**
+     * @author Maximilian Jaesch
+     */
     public void deleteAllUebungen(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.delete_all_uebung_dialog_content);
@@ -137,7 +139,9 @@ public class HomeFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    /**
+     * @author Maximilian Jaesch, Abdurrahman Azattemür
+     */
     private Bundle prepareUebungBundle(Uebung uebung){
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_ID, uebung.getId());
@@ -152,47 +156,3 @@ public class HomeFragment extends Fragment {
         return bundle;
     }
 }
-/*
-CODE GRAVEYARD:
- @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_UEBUNG_REQUEST && resultCode == Activity.RESULT_OK){
-            String titel = data.getStringExtra(AddEditUebungFragment.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditUebungFragment.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddEditUebungFragment.EXTRA_PRIORITY, 1);
-            int anzahl = data.getIntExtra(AddEditUebungFragment.EXTRA_COUNT, 1);
-            Uebung uebung = new Uebung(titel, description, anzahl, priority);
-            homeViewModel.insert(uebung);
-            Toast.makeText(getActivity(), "Uebung hinzugefuegt", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == Activity.RESULT_OK){
-            int id = data.getIntExtra(AddEditUebungFragment.EXTRA_ID, -1);
-            if (id == -1) {
-                Toast.makeText(getActivity(), "Fehler aufgetreten", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            String titel = data.getStringExtra(AddEditUebungFragment.EXTRA_TITLE);
-            String description = data.getStringExtra(AddEditUebungFragment.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddEditUebungFragment.EXTRA_PRIORITY, 1);
-            int anzahl = data.getIntExtra(AddEditUebungFragment.EXTRA_COUNT, 1);
-            Uebung uebung = new Uebung(titel, description, anzahl, priority);
-            uebung.setId(id);
-
-            homeViewModel.update(uebung);
-
-            Toast.makeText(getActivity(), "Uebung aktuallisiert", Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(getActivity(), "Uebung nicht hinzugefuegt", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    Intent intent = new Intent(getActivity(), AddEditUebungFragment.class);
-                intent.putExtra(AddEditUebungFragment.EXTRA_ID, uebung.getId());
-                intent.putExtra(AddEditUebungFragment.EXTRA_TITLE, uebung.getTitel());
-                intent.putExtra(AddEditUebungFragment.EXTRA_DESCRIPTION, uebung.getBeschreibung());
-                intent.putExtra(AddEditUebungFragment.EXTRA_PRIORITY, uebung.getPrioritaet());
-                intent.putExtra(AddEditUebungFragment.EXTRA_COUNT, uebung.getAnzahlDerWiederholungen());
-                startActivityForResult(intent, EDIT_NOTE_REQUEST);
- */
