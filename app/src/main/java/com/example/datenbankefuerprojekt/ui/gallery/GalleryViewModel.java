@@ -76,6 +76,7 @@ public class GalleryViewModel extends AndroidViewModel {
         return startTime;
     }
 
+    public void deleteAllControlPauses(){ repository.deleteAllControlPause();}
 
     public long getPauseOffset() {
         return pauseOffset;

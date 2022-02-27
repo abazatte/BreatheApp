@@ -1,10 +1,16 @@
 package com.example.datenbankefuerprojekt.ui.gallery;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,6 +39,7 @@ import java.util.List;
 
 public class GalleryFragment extends Fragment {
 
+    public static final String TAG = "GalleryFragment";
     private GalleryViewModel galleryViewModel;
     private FragmentGalleryBinding binding;
 
@@ -51,41 +58,11 @@ public class GalleryFragment extends Fragment {
     private BarChart chart;
 
 
-    /* TODO: alles was nicht mit View objekten wie barchart zu tun hat, in viewmodel packen!!!
-
-    */
-
-
-/*
-    private final MyHandler myHandler = new MyHandler();
-    private MyRunnable myRunnable;
-
-
-    //https://stackoverflow.com/questions/1520887/how-to-pause-sleep-thread-or-process-in-android
-    private static class MyHandler extends Handler {
-    }
-
-    private static class MyRunnable implements Runnable {
-        private final WeakReference<GalleryFragment> galleryFragmentWeakReference;
-
-        public MyRunnable(GalleryFragment fragment) {
-            galleryFragmentWeakReference = new WeakReference<>(fragment);
-        }
-
-        @Override
-        public void run() {
-            GalleryFragment fragment = galleryFragmentWeakReference.get();
-            if (fragment != null) {
-                //fragment.returnToUebungEditor();
-                fragment.startDiagrammCreation();
-            }
-        }
-    }*/
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
                 new ViewModelProvider(requireActivity()).get(GalleryViewModel.class);
+        setHasOptionsMenu(true);
         setMonthXValues();
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -98,6 +75,7 @@ public class GalleryFragment extends Fragment {
                 fillMonthControlPauses();
                 reorderMonthControlPauses();
                 startDiagrammCreation();
+                Log.i(TAG, "onCreateView: dolepe?");
             }
         });
 
@@ -231,38 +209,6 @@ public class GalleryFragment extends Fragment {
         }
     }
 
-    /*
-    private List<ControlPause> getMonthControlPausesForBiggerList(int month) {
-        switch (month) {
-            case 0:
-                return jan;
-            case 1:
-                return feb;
-            case 2:
-                return mar;
-            case 3:
-                return apr;
-            case 4:
-                return mai;
-            case 5:
-                return jun;
-            case 6:
-                return jul;
-            case 7:
-                return aug;
-            case 8:
-                return sep;
-            case 9:
-                return okt;
-            case 10:
-                return nov;
-            case 11:
-                return dez;
-            default:
-                return null;
-        }
-    }*/
-
     private String getMonthString(int currentMonth) {
         switch (currentMonth) {
             case 0:
@@ -301,20 +247,42 @@ public class GalleryFragment extends Fragment {
         configureChartAppearance();
         prepareChartData(data);
     }
+
+    public void deleteAllControlPauses(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Alle Control Pauses Löschen?");
+        builder.setMessage("Wollen Sie wirklich alle Control Pauses löschen?");
+        builder.setPositiveButton("Alles Löschen", (dialogInterface, i) -> {
+            galleryViewModel.deleteAllControlPauses();
+            Toast.makeText(getActivity(), "Alle Control Pauses gelöscht.", Toast.LENGTH_SHORT).show();
+            this.controlPauses = galleryViewModel.getAllControlPauseByDate().getValue();
+            populateMonthControlPauses();
+            fillMonthControlPauses();
+            reorderMonthControlPauses();
+            startDiagrammCreation();
+        });
+        builder.setNegativeButton("Abbrechen", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.home_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.delete_all_uebung:
+                deleteAllControlPauses();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
 
-/*
-* List<ControlPause> jan = new ArrayList<ControlPause>();
-    List<ControlPause> feb = new ArrayList<ControlPause>();
-    List<ControlPause> mar = new ArrayList<ControlPause>();
-    List<ControlPause> apr = new ArrayList<ControlPause>();
-    List<ControlPause> mai = new ArrayList<ControlPause>();
-    List<ControlPause> jun = new ArrayList<ControlPause>();
-    List<ControlPause> jul = new ArrayList<ControlPause>();
-    List<ControlPause> aug = new ArrayList<ControlPause>();
-    List<ControlPause> sep = new ArrayList<ControlPause>();
-    List<ControlPause> okt = new ArrayList<ControlPause>();
-    List<ControlPause> nov = new ArrayList<ControlPause>();
-    List<ControlPause> dez = new ArrayList<ControlPause>();
-*
-* */

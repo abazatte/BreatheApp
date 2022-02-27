@@ -10,7 +10,10 @@ import androidx.room.Update;
 import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 
 import java.util.List;
-
+/**
+ * @author Abdurrahman Azattemür
+ * <p>Dies ist die Dao für die Uebung Entität.</p>
+ */
 @Dao
 public interface UebungDao {
     @Insert

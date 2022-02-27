@@ -11,7 +11,10 @@ import androidx.room.Update;
 import com.example.datenbankefuerprojekt.db.main.database.fragment.Fragment;
 
 import java.util.List;
-
+/**
+ * @author Abdurrahman Azattemür
+ * <p>Dies ist die Dao für Fragment.</p>
+ */
 @Dao
 public interface FragmentDao {
 

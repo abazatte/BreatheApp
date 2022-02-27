@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datenbankefuerprojekt.R;
-
+/**
+ * @author Abdurrahman Azattemür, Maximilian Jaesch
+ * <p>Diese Klasse ist dazu da, die Items in der Recyclerview zu lokalisieren und die Werte richtig hinzuzufügen.</p>
+ */
 public class UebungAdapter extends ListAdapter<Uebung, UebungAdapter.UebungHolder> {
     private OnItemClickListener itemClickListener;
     private OnEditButtonClickListener editButtonClickListener;
@@ -63,9 +66,6 @@ public class UebungAdapter extends ListAdapter<Uebung, UebungAdapter.UebungHolde
         private TextView textViewPrioritaet;
         private TextView textViewAnzahl;
         private Button editButton;
-        //hier noch textview duration wenn useTimed auf true ist
-        //das iwie mit invisible und visible lösen!
-
 
         public UebungHolder(@NonNull View itemView){
             super(itemView);

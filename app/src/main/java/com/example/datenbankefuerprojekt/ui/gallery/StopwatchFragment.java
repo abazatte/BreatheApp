@@ -19,7 +19,11 @@ import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPa
 
 import java.util.Calendar;
 
-
+/**
+ * @author Maximilian Jaesch
+ *
+ * <P>Quelle: https://www.youtube.com/watch?v=RLnb4vVkftc wurde als Basis verwendet.</P>
+ */
 public class StopwatchFragment extends Fragment {
     private StopwatchFragment2Binding binding;
     private GalleryViewModel mViewModel;

@@ -2,7 +2,10 @@ package com.example.datenbankefuerprojekt.db.main.database.uebung;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+/**
+ * @author Abdurrahman Azattemür, Maximilian Jaesch
+ * <p>Dies ist die Entität "Uebung".</p>
+ */
 @Entity(tableName = "uebung_table")
 public class Uebung {
     @PrimaryKey(autoGenerate = true)

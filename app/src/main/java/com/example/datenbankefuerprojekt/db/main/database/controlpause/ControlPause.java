@@ -6,6 +6,10 @@ import androidx.room.TypeConverters;
 
 import java.sql.Date;
 
+/**
+ * @author Abdurrahman Azattemür, Maximilian Jaesch (Long)
+ * <p>Dies ist die Entität für ControlPause.</p>
+ */
 @Entity(tableName = "control_pause_table")
 @TypeConverters({Converter.class})
 public class ControlPause {

@@ -10,7 +10,10 @@ import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPa
 import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPauseDao;
 
 import java.util.List;
-
+/**
+ * @author Abdurrahman Azattemür
+ * <p>Dies ist die Repository für die Entität: ControlPause.</p>
+ */
 public class ControlPauseRepository {
     private ControlPauseDao controlPauseDao;
     private LiveData<List<ControlPause>> alleControlPauseByDate;
@@ -35,6 +38,8 @@ public class ControlPauseRepository {
         return alleControlPauseByLaenge;
     }
 
+    public void deleteAllControlPause(){new DeleteAllControlPausesAsyncTask(controlPauseDao).execute();}
+
     private static class InsertControlPauseAsyncTask extends AsyncTask<ControlPause, Void, Void>{
         private ControlPauseDao controlPauseDao;
 
@@ -45,6 +50,20 @@ public class ControlPauseRepository {
         @Override
         protected Void doInBackground(ControlPause... controlPauses){
             controlPauseDao.insert(controlPauses[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllControlPausesAsyncTask extends AsyncTask<Void, Void, Void>{
+        private ControlPauseDao controlPauseDao;
+
+        private DeleteAllControlPausesAsyncTask(ControlPauseDao controlPauseDao){
+            this.controlPauseDao = controlPauseDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids){
+            controlPauseDao.deleteAllControlPauses();
             return null;
         }
     }

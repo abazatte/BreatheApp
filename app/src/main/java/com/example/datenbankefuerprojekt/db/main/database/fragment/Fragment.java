@@ -7,6 +7,10 @@ import androidx.room.PrimaryKey;
 
 import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 
+/**
+ * @author Abdurrahman Azattemür
+ * <p>Dies ist die Entität Fragment.</p>
+ */
 @Entity(indices = {@Index(value = {"fragmentId","uebungId"},unique = true)},tableName = "fragment_table", foreignKeys = {@ForeignKey(entity = Uebung.class, parentColumns = "id", childColumns = "uebungId", onDelete = ForeignKey.CASCADE)})
 public class Fragment {
 

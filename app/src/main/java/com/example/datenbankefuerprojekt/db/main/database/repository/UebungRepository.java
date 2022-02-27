@@ -12,7 +12,10 @@ import com.example.datenbankefuerprojekt.db.main.database.uebung.Uebung;
 import com.example.datenbankefuerprojekt.db.main.database.uebung.UebungDao;
 
 import java.util.List;
-
+/**
+ * @author Abdurrahman Azattemür
+ * <p>Dies ist die Repository für die Entitäten: Uebung und Fragment.</p>
+ */
 public class UebungRepository {
     private UebungDao uebungDao;
     private FragmentDao fragmentDao;
@@ -26,8 +29,6 @@ public class UebungRepository {
         alleUebungen = uebungDao.getAllNotes();
         alleFragmente = fragmentDao.getAllFragments();
     }
-
-
 
     public void insertUebung(Uebung uebung) {
         new InsertUebungAsyncTask(uebungDao).execute(uebung);
@@ -45,8 +46,6 @@ public class UebungRepository {
         new DeleteAllUebungAsyncTask(uebungDao).execute();
     }
 
-
-
     public void insertFragment(Fragment fragment) {
         new InsertFragmentAsyncTask(fragmentDao).execute(fragment);
     }
@@ -63,8 +62,6 @@ public class UebungRepository {
         new DeleteAllFragmentAsyncTask(fragmentDao).execute();
     }
 
-
-
     public LiveData<List<Fragment>> getAlleFragment() {
         return alleFragmente;
     }
@@ -77,30 +74,10 @@ public class UebungRepository {
         return alleUebungen;
     }
 
-    /*
-    public AsyncTask<Integer, Void, LiveData<Uebung>> getUebungById(int uebungId){
-        return new getUebungByIdAsyncTask(uebungDao).execute(uebungId);
-    }*/
-
-
     public LiveData<Uebung> getUebungById(int uebungId){
         return uebungDao.getUebungById(uebungId);
     }
 
-    /*
-    private static class getUebungByIdAsyncTask extends AsyncTask<Integer, Void, LiveData<Uebung>> {
-        private UebungDao uebungDao;
-
-        private getUebungByIdAsyncTask(UebungDao uebungDao) {
-            this.uebungDao = uebungDao;
-        }
-
-        @Override
-        protected LiveData<Uebung> doInBackground(Integer... uebungId) {
-            return uebungDao.getUebungById(uebungId[0]);
-        }
-    }
-*/
     private static class InsertUebungAsyncTask extends AsyncTask<Uebung, Void, Void> {
         private UebungDao uebungDao;
 
@@ -212,6 +189,4 @@ public class UebungRepository {
             return null;
         }
     }
-
-
 }

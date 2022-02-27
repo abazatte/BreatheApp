@@ -19,7 +19,9 @@ import com.example.datenbankefuerprojekt.db.main.database.uebung.UebungDao;
 import java.sql.Date;
 import java.util.Random;
 
-
+/**
+ * @author Abdurrahman Azattemür, Maximilian Jaesch
+ */
 @Database(entities = {Uebung.class, Fragment.class, ControlPause.class}, version = 12)
 public abstract class UebungDatenbank extends RoomDatabase {
     private static UebungDatenbank INSTANCE;
@@ -46,6 +48,11 @@ public abstract class UebungDatenbank extends RoomDatabase {
         }
     };
 
+    /**
+     * @author Abdurrahman Azattemür, Maximilian Jaesch
+     * <p>Beim ersten Builden der Anwendung wird die Klasse im Backgroundthread durchgeführt.</p>
+     * <p>Sie befüllt die Datenbank mit Dummy-Werten.</p>
+     */
     private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void> {
         private UebungDao uebungDao;
         private ControlPauseDao controlPauseDao;
@@ -84,6 +91,4 @@ public abstract class UebungDatenbank extends RoomDatabase {
             return null;
         }
     }
-
-
 }

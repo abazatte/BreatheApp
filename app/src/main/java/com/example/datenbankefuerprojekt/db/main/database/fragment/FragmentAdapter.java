@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datenbankefuerprojekt.R;
-
+/**
+ * @author Abdurrahman Azattemür
+ */
 public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.FragmentHolder> {
     private OnItemClickListener listener;
 
@@ -19,7 +21,6 @@ public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.Fragm
         super(DIFF_CALLBACK);
     }
 
-    //wo wird dies aufgerufen??
     private static final DiffUtil.ItemCallback<Fragment> DIFF_CALLBACK = new DiffUtil.ItemCallback<Fragment>() {
         @Override
         public boolean areItemsTheSame(@NonNull Fragment oldItem, @NonNull Fragment newItem) {
@@ -49,7 +50,8 @@ public class FragmentAdapter extends ListAdapter<Fragment, FragmentAdapter.Fragm
     public void onBindViewHolder(@NonNull FragmentHolder holder, int position) {
         Fragment currentNote = getItem(position);
         holder.textViewTitel.setText(currentNote.getTitelFragment());
-        holder.textViewBeschreibung.setText("Ausatmen: " + currentNote.getAusAtmenZeit() + "\nEinatmen: " + currentNote.getEinAtmenZeit());
+        holder.textViewBeschreibung.setText("Einatmen: " + currentNote.getEinAtmenZeit() + "\t\tAnhalten: " + currentNote.getEinLuftanhaltZeit()
+         + "\nAusatmen: " + currentNote.getAusAtmenZeit() + "\t\tAushalten: " + currentNote.getAusLuftanhaltZeit() + "\t\t\tWdh: " + currentNote.getAnzahlWiederholungenFragment());
         holder.textViewPrioritaet.setText(String.valueOf(currentNote.getPrioritaetFragment()));
     }
 

@@ -9,6 +9,10 @@ import com.example.datenbankefuerprojekt.db.main.database.controlpause.ControlPa
 
 import java.util.List;
 
+/**
+ * @author Abdurrahman Azattemür
+ * <p>Dies ist die Dao für ControlPause.</p>
+ */
 @Dao
 public interface ControlPauseDao {
     @Insert
@@ -19,4 +23,7 @@ public interface ControlPauseDao {
 
     @Query("SELECT * FROM control_pause_table ORDER BY date DESC")
     LiveData<List<ControlPause>> getAllControlPauseByDate();
+
+    @Query("DELETE FROM control_pause_table")
+    void deleteAllControlPauses();
 }
