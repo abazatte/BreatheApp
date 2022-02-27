@@ -52,4 +52,5 @@
     <string name="edit_text_minutes_hint">min</string>
     <string name="empty_hint">"                "</string>
     <string name="priority">Priority:</string>
+    <string name="delete_all_uebungen_title">Alle Übungen Löschen?</string>
 </resources>

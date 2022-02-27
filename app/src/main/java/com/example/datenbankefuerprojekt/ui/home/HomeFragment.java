@@ -112,6 +112,7 @@ public class HomeFragment extends Fragment {
      */
     public void deleteAllUebungen(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.delete_all_uebungen_title);
         builder.setMessage(R.string.delete_all_uebung_dialog_content);
         builder.setPositiveButton(R.string.delete_all_uebung_dialog_positive_button_label, (dialogInterface, i) -> {
             homeViewModel.deleteAllUebung();
