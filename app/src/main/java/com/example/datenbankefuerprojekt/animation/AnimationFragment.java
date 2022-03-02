@@ -94,6 +94,9 @@ public class AnimationFragment extends Fragment {
         binding = AnimationFragmentBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
 
+        //damit nicht der screen während der übung ausgeht!
+        root.setKeepScreenOn(true);
+
         Log.i(TAG, "onCreateView: wird doppler?");
         initMemberVariables();
 

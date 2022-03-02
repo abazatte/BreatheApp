@@ -83,6 +83,9 @@ public class ProgressBarFragment extends Fragment {
 
         binding = FragmentProgressBarBinding.inflate(inflater,container,false);
 
+        //damit nicht der screen während der übung ausgeht!
+        binding.getRoot().setKeepScreenOn(true);
+
         Log.i(TAG, "onCreateView: wird doppler?");
         initMemberVariables();
         receiveUebungAndSetViewModelAndTitle();
